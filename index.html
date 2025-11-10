@@ -7,6 +7,7 @@
 <meta name="description" content="Bini.js v9.1.5: Enterprise React framework with TypeScript API routes, unified file structure, 2x faster Fastify, source protection, and zero-config setup." />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23000'/%3E%3Ctext x='60' y='75' text-anchor='middle' font-family='system-ui' font-size='80' font-weight='900' fill='%2300D9FF'%3Eß%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * {
     margin: 0;
@@ -21,12 +22,17 @@
     --accent-light: #a78bfa;
     --dark-bg: #0a0e27;
     --card-bg: #1a1f3a;
+    --card-bg-hover: #23294a;
     --border: #2d3748;
     --text-primary: #f8f9fa;
     --text-secondary: #b0b8c1;
     --text-tertiary: #7a8896;
     --success: #00d084;
     --warning: #ffa500;
+    --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+    --gradient-reverse: linear-gradient(135deg, var(--accent), var(--primary));
+    --glass-bg: rgba(26, 31, 58, 0.7);
+    --glass-border: rgba(124, 58, 237, 0.2);
 }
 
 html {
@@ -90,6 +96,12 @@ body {
     }
 }
 
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 /* Navbar */
 header {
     position: fixed;
@@ -130,18 +142,37 @@ header.scrolled {
 .logo-icon {
     width: 36px;
     height: 36px;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: var(--gradient);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 20px;
     font-weight: 900;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-icon::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: rotate(45deg);
+    animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
 .version-badge {
     display: inline-block;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: var(--gradient);
     color: var(--dark-bg);
     padding: 0.3rem 0.7rem;
     border-radius: 20px;
@@ -176,7 +207,7 @@ header.scrolled {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
+    background: var(--gradient);
     transition: width 0.3s ease;
 }
 
@@ -189,7 +220,7 @@ header.scrolled {
 }
 
 .btn-nav {
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: var(--gradient);
     color: var(--dark-bg);
     padding: 0.6rem 1.5rem;
     border-radius: 8px;
@@ -199,6 +230,23 @@ header.scrolled {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-nav:hover::before {
+    left: 100%;
 }
 
 .btn-nav:hover {
@@ -206,9 +254,35 @@ header.scrolled {
     box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
 }
 
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     .nav-menu { gap: 1rem; }
-    .nav-links { display: none; }
+    .nav-links { 
+        display: none; 
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 14, 39, 0.95);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        padding: 1rem 0;
+        border-top: 1px solid rgba(124, 58, 237, 0.2);
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .mobile-menu-btn {
+        display: block;
+    }
 }
 
 /* Hero Section */
@@ -266,9 +340,11 @@ header.scrolled {
 
 .hero h1 .gradient-text {
     background: linear-gradient(135deg, var(--primary), var(--accent), var(--primary));
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: gradient 3s ease infinite;
     animation: fadeIn 1s ease-out 0.4s both;
 }
 
@@ -293,7 +369,7 @@ header.scrolled {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: var(--gradient);
     color: var(--dark-bg);
     padding: 1rem 2.5rem;
     border-radius: 12px;
@@ -304,6 +380,23 @@ header.scrolled {
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
     letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-primary:hover {
@@ -321,6 +414,23 @@ header.scrolled {
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.btn-secondary:hover::before {
+    left: 100%;
 }
 
 .btn-secondary:hover {
@@ -341,10 +451,11 @@ header.scrolled {
 .stat {
     text-align: center;
     padding: 1.5rem;
-    background: rgba(0, 217, 255, 0.05);
-    border: 1px solid rgba(0, 217, 255, 0.1);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 12px;
     transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .stat:hover {
@@ -356,7 +467,7 @@ header.scrolled {
 .stat-value {
     font-size: 2.5rem;
     font-weight: 900;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: var(--gradient);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -390,7 +501,7 @@ header.scrolled {
 }
 
 .section-header h2 .gradient-text {
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: var(--gradient);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -412,13 +523,14 @@ header.scrolled {
 }
 
 .card {
-    background: linear-gradient(135deg, rgba(26, 31, 58, 0.8), rgba(26, 31, 58, 0.5));
-    border: 1px solid rgba(124, 58, 237, 0.2);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
     padding: 2rem;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .card::before {
@@ -436,7 +548,7 @@ header.scrolled {
 
 .card:hover {
     border-color: var(--primary);
-    background: linear-gradient(135deg, rgba(26, 31, 58, 1), rgba(26, 31, 58, 0.8));
+    background: var(--card-bg-hover);
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
 }
@@ -452,7 +564,7 @@ header.scrolled {
 
 .card-badge {
     display: inline-block;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: var(--gradient);
     color: var(--dark-bg);
     padding: 0.4rem 0.9rem;
     border-radius: 20px;
@@ -486,12 +598,24 @@ header.scrolled {
 .feature-card {
     display: flex;
     gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.1);
 }
 
 .feature-icon {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: var(--gradient);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -553,12 +677,13 @@ header.scrolled {
 }
 
 .accordion-item {
-    background: linear-gradient(135deg, rgba(26, 31, 58, 0.5), rgba(26, 31, 58, 0.3));
-    border: 1px solid rgba(124, 58, 237, 0.2);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 12px;
     margin-bottom: 1rem;
     overflow: hidden;
     transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .accordion-item:hover {
@@ -625,6 +750,8 @@ footer {
     text-align: center;
     color: var(--text-tertiary);
     margin-top: 5rem;
+    background: rgba(10, 14, 39, 0.5);
+    backdrop-filter: blur(10px);
 }
 
 footer p {
@@ -644,17 +771,34 @@ footer p {
 /* CTA Section */
 .cta-section {
     text-align: center;
-    background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(124, 58, 237, 0.05));
-    border: 1px solid rgba(124, 58, 237, 0.2);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 4rem 2rem;
     margin: 4rem 0;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+    animation: float 10s ease-in-out infinite;
+    pointer-events: none;
 }
 
 .cta-section h3 {
     font-size: 2rem;
     font-weight: 900;
     margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
 }
 
 .cta-section p {
@@ -664,6 +808,8 @@ footer p {
     margin-left: auto;
     margin-right: auto;
     line-height: 1.8;
+    position: relative;
+    z-index: 2;
 }
 
 /* Responsive */
@@ -703,9 +849,115 @@ footer p {
 .section:nth-child(even) {
     animation-delay: 0.2s;
 }
+
+/* Floating particles */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: var(--gradient);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float 15s infinite linear;
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: var(--gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-bg);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.4);
+}
+
+/* Progress bar */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--gradient);
+    z-index: 1001;
+    transition: width 0.2s ease;
+}
+
+/* Loading animation */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.loading.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 217, 255, 0.2);
+    border-top: 5px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progress-bar"></div>
+
     <!-- Navigation -->
     <header id="navbar">
         <div class="navbar">
@@ -715,19 +967,23 @@ footer p {
                 <span class="version-badge">v9.1.5</span>
             </div>
             <nav class="nav-menu">
-                <div class="nav-links">
+                <div class="nav-links" id="nav-links">
                     <a href="#features">Features</a>
                     <a href="#structure">Structure</a>
                     <a href="#api">API Routes</a>
                     <a href="#faq">FAQ</a>
                 </div>
                 <button class="btn-nav">Get Started</button>
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
             </nav>
         </div>
     </header>
 
     <!-- Hero -->
     <section class="hero">
+        <div class="particles" id="particles"></div>
         <div class="hero-content">
             <h1>Build <span class="gradient-text">Production-Ready</span> React Apps Lightning Fast</h1>
             <p class="hero-subtitle">TypeScript API routes, unified file structure, 2x faster Fastify server, and enterprise-grade source protection. Zero configuration needed.</p>
@@ -841,7 +1097,7 @@ footer p {
             <p>Next.js-compatible organization for modern development</p>
         </div>
 
-        <div style="background: linear-gradient(135deg, rgba(26, 31, 58, 0.9), rgba(26, 31, 58, 0.6)); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 16px; padding: 2rem; overflow-x: auto; margin: 2rem 0;">
+        <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 2rem; overflow-x: auto; margin: 2rem 0; backdrop-filter: blur(10px);">
             <div style="font-family: 'Courier New', monospace; font-size: 0.95rem; line-height: 2; color: var(--primary); letter-spacing: 0.5px;">
                 <div><span style="color: var(--accent-light);">src/app/</span></div>
                 <div style="margin-left: 1.5rem;"><span style="color: var(--text-secondary);">├──</span> <span style="color: var(--primary);">layout.tsx</span> <span style="color: var(--text-tertiary);"># Root layout</span></div>
@@ -1365,11 +1621,31 @@ export default function handler(req, res) {
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <script>
+        // Loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1000);
+        });
+
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
 
         // Accordion
@@ -1385,7 +1661,7 @@ export default function handler(req, res) {
             btn.addEventListener('click', function() {
                 if (this.textContent.includes('View Docs')) {
                     window.open('https://github.com/Binidu01/bini');
-                } else {
+                } else if (this.textContent.includes('Get Started') || this.textContent.includes('Start Building')) {
                     window.open('https://www.npmjs.com/package/create-bini-app');
                 }
             });
@@ -1404,6 +1680,59 @@ export default function handler(req, res) {
             el.style.opacity = '0.8';
             observer.observe(el);
         });
+
+        // Progress bar
+        const progressBar = document.getElementById('progress-bar');
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Floating particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 20;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Random size between 2px and 6px
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random position
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            // Random animation duration between 10s and 30s
+            const duration = Math.random() * 20 + 10;
+            particle.style.animationDuration = `${duration}s`;
+            
+            // Random delay
+            const delay = Math.random() * 5;
+            particle.style.animationDelay = `${delay}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
     </script>
 </body>
 </html>
