@@ -47,15 +47,9 @@ body {
     overflow-x: hidden;
 }
 
-/* Animations */
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }
-}
-
-@keyframes glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); }
-    50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.5); }
 }
 
 @keyframes slideInUp {
@@ -83,17 +77,6 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
-}
-
-@keyframes pulse-ring {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
 }
 
 @keyframes gradient {
@@ -153,27 +136,10 @@ header.scrolled {
     overflow: hidden;
 }
 
-.logo-icon::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-    transform: rotate(45deg);
-    animation: shine 3s infinite linear;
-}
-
-@keyframes shine {
-    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-}
-
 .version-badge {
     display: inline-block;
     background: var(--gradient);
-    color: var(--dark-bg);
+    color: white;
     padding: 0.3rem 0.7rem;
     border-radius: 20px;
     font-size: 0.65rem;
@@ -198,6 +164,7 @@ header.scrolled {
     color: var(--text-secondary);
     transition: all 0.3s ease;
     position: relative;
+    text-decoration: none;
 }
 
 .nav-links a::after {
@@ -232,21 +199,6 @@ header.scrolled {
     box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
     position: relative;
     overflow: hidden;
-}
-
-.btn-nav::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
-}
-
-.btn-nav:hover::before {
-    left: 100%;
 }
 
 .btn-nav:hover {
@@ -345,7 +297,6 @@ header.scrolled {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradient 3s ease infinite;
-    animation: fadeIn 1s ease-out 0.4s both;
 }
 
 .hero-subtitle {
@@ -382,21 +333,9 @@ header.scrolled {
     letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
-}
-
-.btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
-}
-
-.btn-primary:hover::before {
-    left: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
 }
 
 .btn-primary:hover {
@@ -416,21 +355,9 @@ header.scrolled {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-}
-
-.btn-secondary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
-    transition: left 0.5s;
-}
-
-.btn-secondary:hover::before {
-    left: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
 }
 
 .btn-secondary:hover {
@@ -574,6 +501,12 @@ header.scrolled {
     letter-spacing: 0.5px;
 }
 
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
 .card h3 {
     font-size: 1.4rem;
     font-weight: 800;
@@ -598,34 +531,36 @@ header.scrolled {
 .feature-card {
     display: flex;
     gap: 1.5rem;
-    padding: 1.5rem;
+    padding: 2rem;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    border-radius: 12px;
+    border-radius: 16px;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     border-color: var(--primary);
-    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.1);
+    box-shadow: 0 15px 40px rgba(0, 217, 255, 0.15);
+    background: rgba(124, 58, 237, 0.05);
 }
 
 .feature-icon {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background: var(--gradient);
-    border-radius: 12px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     flex-shrink: 0;
+    color: var(--dark-bg);
 }
 
 .feature-content h4 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
@@ -636,6 +571,27 @@ header.scrolled {
     line-height: 1.6;
 }
 
+/* Tags */
+.tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(0, 217, 255, 0.1);
+    color: var(--primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 217, 255, 0.2);
+}
+
 /* Code Block */
 .code-block {
     background: rgba(10, 14, 39, 0.9);
@@ -643,34 +599,21 @@ header.scrolled {
     border-radius: 12px;
     padding: 2rem;
     overflow-x: auto;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
     position: relative;
-}
-
-.code-block::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 35px;
-    background: rgba(124, 58, 237, 0.1);
-    border-bottom: 1px solid rgba(124, 58, 237, 0.2);
-    border-radius: 12px 12px 0 0;
 }
 
 .code-block code {
     color: var(--primary);
     font-family: 'Courier New', monospace;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     line-height: 1.8;
     display: block;
-    padding-top: 1.5rem;
     white-space: pre;
     overflow-x: auto;
 }
 
-/* FAQ */
+/* Accordion */
 .accordion {
     max-width: 800px;
     margin: 0 auto;
@@ -699,6 +642,7 @@ header.scrolled {
     background: rgba(124, 58, 237, 0.05);
     transition: all 0.3s ease;
     font-weight: 600;
+    user-select: none;
 }
 
 .accordion-item.active .accordion-header {
@@ -707,7 +651,7 @@ header.scrolled {
 }
 
 .accordion-icon {
-    font-size: 1.5rem;
+    font-size: 1rem;
     transition: transform 0.3s ease;
 }
 
@@ -739,33 +683,16 @@ header.scrolled {
 
 .accordion-content li {
     color: var(--text-secondary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     line-height: 1.8;
+    list-style: none;
 }
 
-/* Footer */
-footer {
-    border-top: 1px solid rgba(124, 58, 237, 0.2);
-    padding: 3rem 2rem;
-    text-align: center;
-    color: var(--text-tertiary);
-    margin-top: 5rem;
-    background: rgba(10, 14, 39, 0.5);
-    backdrop-filter: blur(10px);
-}
-
-footer p {
-    margin: 0.5rem 0;
-    font-size: 0.95rem;
-}
-
-.footer-text {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-    font-size: 0.9rem;
+.accordion-content li:before {
+    content: "→ ";
+    color: var(--primary);
+    font-weight: bold;
+    margin-right: 0.5rem;
 }
 
 /* CTA Section */
@@ -812,62 +739,29 @@ footer p {
     z-index: 2;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .hero { padding: 2rem 1.5rem; }
-    .hero h1 { font-size: 2rem; }
-    .section { padding: 3rem 1.5rem; }
-    .nav-menu { gap: 0.5rem; }
-    .hero-cta { flex-direction: column; }
-    .btn-primary, .btn-secondary { width: 100%; }
+/* Footer */
+footer {
+    border-top: 1px solid rgba(124, 58, 237, 0.2);
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--text-tertiary);
+    margin-top: 5rem;
+    background: rgba(10, 14, 39, 0.5);
+    backdrop-filter: blur(10px);
 }
 
-/* Tags */
-.tags {
+footer p {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+}
+
+.footer-text {
     display: flex;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 2rem;
     flex-wrap: wrap;
-    margin-top: 1rem;
-}
-
-.tag {
-    display: inline-block;
-    background: rgba(0, 217, 255, 0.1);
-    color: var(--primary);
-    padding: 0.4rem 0.8rem;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    border: 1px solid rgba(0, 217, 255, 0.2);
-}
-
-/* Section animations */
-.section:nth-child(odd) {
-    animation-delay: 0.1s;
-}
-
-.section:nth-child(even) {
-    animation-delay: 0.2s;
-}
-
-/* Floating particles */
-.particles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.particle {
-    position: absolute;
-    background: var(--gradient);
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: float 15s infinite linear;
+    margin-top: 2rem;
+    font-size: 0.9rem;
 }
 
 /* Back to top button */
@@ -947,6 +841,16 @@ footer p {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+@media (max-width: 768px) {
+    .hero { padding: 2rem 1.5rem; }
+    .hero h1 { font-size: 2rem; }
+    .section { padding: 3rem 1.5rem; }
+    .nav-menu { gap: 0.5rem; }
+    .hero-cta { flex-direction: column; }
+    .btn-primary, .btn-secondary { width: 100%; }
+    .feature-card { flex-direction: column; }
+}
 </style>
 </head>
 <body>
@@ -973,7 +877,7 @@ footer p {
                     <a href="#api">API Routes</a>
                     <a href="#faq">FAQ</a>
                 </div>
-                <button class="btn-nav">Get Started</button>
+                <button class="btn-nav"><i class="fas fa-arrow-right"></i> Get Started</button>
                 <button class="mobile-menu-btn" id="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -983,14 +887,13 @@ footer p {
 
     <!-- Hero -->
     <section class="hero">
-        <div class="particles" id="particles"></div>
         <div class="hero-content">
             <h1>Build <span class="gradient-text">Production-Ready</span> React Apps Lightning Fast</h1>
             <p class="hero-subtitle">TypeScript API routes, unified file structure, 2x faster Fastify server, and enterprise-grade source protection. Zero configuration needed.</p>
             
             <div class="hero-cta">
-                <button class="btn-primary">Start Building →</button>
-                <button class="btn-secondary">View Docs</button>
+                <button class="btn-primary"><i class="fas fa-code"></i> Start Building</button>
+                <button class="btn-secondary"><i class="fas fa-book"></i> View Docs</button>
             </div>
 
             <div class="stats-container">
@@ -1017,74 +920,80 @@ footer p {
     <!-- What's New -->
     <section class="section" id="features">
         <div class="section-header">
-            <h2>✨ <span class="gradient-text">What's New in v9.1.5</span></h2>
+            <h2><span class="gradient-text">What's New in v9.1.5</span></h2>
             <p>Revolutionary features that redefine React development</p>
         </div>
 
         <div class="grid">
             <div class="card">
                 <span class="card-badge">NEW</span>
-                <h3>🔌 TypeScript API Routes</h3>
+                <div class="card-icon"><i class="fas fa-plug"></i></div>
+                <h3>TypeScript API Routes</h3>
                 <p>Create type-safe API endpoints with full TypeScript support. Automatic compilation and hot reload during development.</p>
                 <div class="tags">
-                    <span class="tag">TypeScript</span>
-                    <span class="tag">Type Safe</span>
-                    <span class="tag">Hot Reload</span>
+                    <span class="tag"><i class="fas fa-check"></i> TypeScript</span>
+                    <span class="tag"><i class="fas fa-shield"></i> Type Safe</span>
+                    <span class="tag"><i class="fas fa-sync"></i> Hot Reload</span>
                 </div>
             </div>
 
             <div class="card">
                 <span class="card-badge">NEW</span>
-                <h3>📁 Unified File Structure</h3>
+                <div class="card-icon"><i class="fas fa-folder-tree"></i></div>
+                <h3>Unified File Structure</h3>
                 <p>Next.js-compatible src/app/ directory with pages and API routes. Dynamic routes [id] and catch-all [...slug] patterns.</p>
                 <div class="tags">
-                    <span class="tag">Next.js Style</span>
-                    <span class="tag">File Based</span>
-                    <span class="tag">Dynamic</span>
+                    <span class="tag"><i class="fas fa-layer-group"></i> File Based</span>
+                    <span class="tag"><i class="fas fa-share"></i> Dynamic</span>
+                    <span class="tag"><i class="fas fa-link"></i> Routing</span>
                 </div>
             </div>
 
             <div class="card">
                 <span class="card-badge">IMPROVED</span>
-                <h3>⚡ Mixed Language Support</h3>
+                <div class="card-icon"><i class="fas fa-code-merge"></i></div>
+                <h3>Mixed Language Support</h3>
                 <p>Use .ts and .js files in the same project. Automatic compilation with full IntelliSense support.</p>
                 <div class="tags">
-                    <span class="tag">JavaScript</span>
-                    <span class="tag">TypeScript</span>
-                    <span class="tag">Flexible</span>
+                    <span class="tag"><i class="fas fa-js"></i> JavaScript</span>
+                    <span class="tag"><i class="fas fa-scroll"></i> TypeScript</span>
+                    <span class="tag"><i class="fas fa-sliders"></i> Flexible</span>
                 </div>
             </div>
 
             <div class="card">
                 <span class="card-badge">IMPROVED</span>
-                <h3>🔐 Enhanced Security</h3>
+                <div class="card-icon"><i class="fas fa-lock"></i></div>
+                <h3>Enhanced Security</h3>
                 <p>Rate limiting (100 req/15min), Helmet headers, path traversal prevention, input sanitization, and prototype pollution protection.</p>
                 <div class="tags">
-                    <span class="tag">Rate Limit</span>
-                    <span class="tag">Helmet</span>
-                    <span class="tag">Security</span>
+                    <span class="tag"><i class="fas fa-hourglass"></i> Rate Limit</span>
+                    <span class="tag"><i class="fas fa-helmet-safety"></i> Helmet</span>
+                    <span class="tag"><i class="fas fa-user-shield"></i> Security</span>
                 </div>
             </div>
 
             <div class="card">
                 <span class="card-badge">IMPROVED</span>
-                <h3>🎯 Fastify Server</h3>
+                <div class="card-icon"><i class="fas fa-fire"></i></div>
+                <h3>Fastify Server</h3>
                 <p>2x faster than Express. HTTP/2 support, health checks (/health), metrics (/metrics), and graceful shutdown.</p>
                 <div class="tags">
-                    <span class="tag">HTTP/2</span>
-                    <span class="tag">Monitoring</span>
-                    <span class="tag">Fast</span>
+                    <span class="tag"><i class="fas fa-arrow-up"></i> HTTP/2</span>
+                    <span class="tag"><i class="fas fa-chart-line"></i> Monitoring</span>
+                    <span class="tag"><i class="fas fa-bolt"></i> Fast</span>
                 </div>
             </div>
 
             <div class="card">
                 <span class="card-badge">CORE</span>
-                <h3>🚀 Zero Configuration</h3>
+                <div class="card-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                <h3>Zero Configuration</h3>
                 <p>Sensible defaults for TypeScript, Tailwind CSS, and modern tooling. Works out of the box.</p>
                 <div class="tags">
-                    <span class="tag">Zero Config</span>
-                    <span class="tag">Ready</span>
-                    <span class="tag">Modern</span>
+                    <span class="tag"><i class="fas fa-cog"></i> Zero Config</span>
+                    <span class="tag"><i class="fas fa-rocket"></i> Ready</span>
+                    <span class="tag"><i class="fas fa-star"></i> Modern</span>
                 </div>
             </div>
         </div>
@@ -1099,7 +1008,7 @@ footer p {
 
         <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 2rem; overflow-x: auto; margin: 2rem 0; backdrop-filter: blur(10px);">
             <div style="font-family: 'Courier New', monospace; font-size: 0.95rem; line-height: 2; color: var(--primary); letter-spacing: 0.5px;">
-                <div><span style="color: var(--accent-light);">src/app/</span></div>
+                <div><span style="color: var(--accent-light);"><i class="fas fa-folder"></i> src/app/</span></div>
                 <div style="margin-left: 1.5rem;"><span style="color: var(--text-secondary);">├──</span> <span style="color: var(--primary);">layout.tsx</span> <span style="color: var(--text-tertiary);"># Root layout</span></div>
                 <div style="margin-left: 1.5rem;"><span style="color: var(--text-secondary);">├──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: var(--text-tertiary);"># Home page (/)</span></div>
                 <div style="margin-left: 1.5rem;"><span style="color: var(--text-secondary);">├──</span> <span style="color: var(--primary);">about/</span></div>
@@ -1107,7 +1016,7 @@ footer p {
                 <div style="margin-left: 1.5rem;"><span style="color: var(--text-secondary);">├──</span> <span style="color: var(--primary);">blog/</span></div>
                 <div style="margin-left: 3rem;"><span style="color: var(--text-secondary);">└──</span> <span style="color: var(--primary);">[slug]/</span></div>
                 <div style="margin-left: 4.5rem;"><span style="color: var(--text-secondary);">└──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: var(--text-tertiary);"># /blog/:slug</span></div>
-                <div style="margin-left: 1.5rem; background: rgba(0, 217, 255, 0.1); padding: 0.8rem; border-left: 3px solid var(--primary); margin-top: 0.5rem; border-radius: 4px;"><span style="color: var(--text-secondary);">├──</span> <span style="color: var(--primary);">api/</span> <span style="color: var(--success);">✨ NEW</span></div>
+                <div style="margin-left: 1.5rem; background: rgba(0, 217, 255, 0.1); padding: 0.8rem; border-left: 3px solid var(--primary); margin-top: 0.5rem; border-radius: 4px;"><span style="color: var(--text-secondary);">├──</span> <span style="color: var(--primary);">api/</span> <span style="color: var(--success);"><i class="fas fa-star"></i> NEW</span></div>
                 <div style="margin-left: 3rem;"><span style="color: var(--text-secondary);">├──</span> <span style="color: var(--primary);">hello.ts</span> <span style="color: var(--text-tertiary);"># TypeScript API</span></div>
                 <div style="margin-left: 3rem;"><span style="color: var(--text-secondary);">├──</span> <span style="color: var(--primary);">users.ts</span> <span style="color: var(--text-tertiary);"># TypeScript API</span></div>
                 <div style="margin-left: 3rem;"><span style="color: var(--text-secondary);">├──</span> <span style="color: var(--primary);">products/</span></div>
@@ -1120,28 +1029,28 @@ footer p {
 
         <div class="features-grid" style="margin-top: 3rem;">
             <div class="feature-card">
-                <div class="feature-icon">✅</div>
+                <div class="feature-icon"><i class="fas fa-check-double"></i></div>
                 <div class="feature-content">
                     <h4>Auto-Discovered Routes</h4>
                     <p>All routes automatically discovered and compiled at startup</p>
                 </div>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🔥</div>
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
                 <div class="feature-content">
                     <h4>Hot Reload</h4>
                     <p>Instant updates in development with sub-50ms HMR</p>
                 </div>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🌐</div>
+                <div class="feature-icon"><i class="fas fa-globe"></i></div>
                 <div class="feature-content">
                     <h4>Production Ready</h4>
                     <p>Works seamlessly in dev, preview, and production</p>
                 </div>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📝</div>
+                <div class="feature-icon"><i class="fas fa-scroll"></i></div>
                 <div class="feature-content">
                     <h4>Full TypeScript</h4>
                     <p>Complete TypeScript support with zero configuration</p>
@@ -1159,94 +1068,92 @@ footer p {
 
         <div class="grid">
             <div class="card">
-                <h3>📝 Basic TypeScript API</h3>
+                <div class="card-icon"><i class="fas fa-pen-fancy"></i></div>
+                <h3>Basic TypeScript API</h3>
                 <p>Simple endpoints with automatic JSON serialization and type safety.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 2rem; overflow-x: auto; margin: 1.5rem 0;">
-                    <div style="font-family: 'Courier New', monospace; font-size: 1.1rem; line-height: 2; color: var(--primary); white-space: pre;">
-<span style="color: var(--text-tertiary);">// src/app/api/users.ts</span>
-<span style="color: var(--accent-light);">import</span> <span style="color: var(--text-tertiary);">type</span> { <span style="color: var(--primary);">Request, Response</span> } <span style="color: var(--accent-light);">from</span> <span style="color: var(--success);">'fastify'</span>
+                <div class="code-block">
+                    <code>// src/app/api/users.ts
+import type { Request, Response } from 'fastify'
 
-<span style="color: var(--accent-light);">export default function</span> <span style="color: var(--primary);">handler</span>(
-  <span style="color: var(--primary);">req:</span> <span style="color: var(--accent-light);">Request</span>,
-  <span style="color: var(--primary);">res:</span> <span style="color: var(--accent-light);">Response</span>
+export default function handler(
+  req: Request,
+  res: Response
 ) {
-  <span style="color: var(--accent-light);">return</span> { <span style="color: var(--primary);">users:</span> [] }
-}
-                    </div>
+  return { users: [] }
+}</code>
                 </div>
             </div>
 
             <div class="card">
-                <h3>🔗 Dynamic Routes</h3>
+                <div class="card-icon"><i class="fas fa-link"></i></div>
+                <h3>Dynamic Routes</h3>
                 <p>URL parameters with full type safety. Supports [id] and [...slug].</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 2rem; overflow-x: auto; margin: 1.5rem 0;">
-                    <div style="font-family: 'Courier New', monospace; font-size: 1.05rem; line-height: 2; color: var(--primary); white-space: pre;">
-<span style="color: var(--text-tertiary);">// src/app/api/products/[id].ts</span>
-<span style="color: var(--accent-light);">export default function</span> <span style="color: var(--primary);">handler</span>(req, res) {
-  <span style="color: var(--accent-light);">const</span> { <span style="color: var(--primary);">id</span> } = req.<span style="color: var(--primary);">query</span>
-  <span style="color: var(--accent-light);">return</span> { 
-    <span style="color: var(--primary);">product:</span> { <span style="color: var(--primary);">id</span>, <span style="color: var(--primary);">name:</span> <span style="color: var(--success);">`Product ${id}`</span> }
+                <div class="code-block">
+                    <code>// src/app/api/products/[id].ts
+export default function handler(req, res) {
+  const { id } = req.query
+  return { 
+    product: { id, name: `Product ${id}` }
   }
-}
-                    </div>
+}</code>
                 </div>
             </div>
 
             <div class="card">
-                <h3>🎯 Request Methods</h3>
+                <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+                <h3>Request Methods</h3>
                 <p>Full REST support with GET, POST, PUT, DELETE, PATCH.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 2rem; overflow-x: auto; margin: 1.5rem 0;">
-                    <div style="font-family: 'Courier New', monospace; font-size: 1rem; line-height: 2; color: var(--primary); white-space: pre;">
-<span style="color: var(--accent-light);">export default function</span> <span style="color: var(--primary);">handler</span>(req, res) {
-  <span style="color: var(--accent-light);">switch</span> (req.<span style="color: var(--primary);">method</span>) {
-    <span style="color: var(--accent-light);">case</span> <span style="color: var(--success);">'GET'</span>: <span style="color: var(--accent-light);">return</span> { <span style="color: var(--primary);">data:</span> [] }
-    <span style="color: var(--accent-light);">case</span> <span style="color: var(--success);">'POST'</span>: 
-      res.<span style="color: var(--primary);">status</span>(<span style="color: var(--warning);">201</span>)
-      <span style="color: var(--accent-light);">return</span> { <span style="color: var(--primary);">created:</span> <span style="color: var(--warning);">true</span> }
-    <span style="color: var(--accent-light);">default:</span> res.<span style="color: var(--primary);">status</span>(<span style="color: var(--warning);">405</span>)
+                <div class="code-block">
+                    <code>export default function handler(req, res) {
+  switch (req.method) {
+    case 'GET': return { data: [] }
+    case 'POST': 
+      res.status(201)
+      return { created: true }
+    default: res.status(405)
   }
-}
-                    </div>
+}</code>
                 </div>
             </div>
 
             <div class="card">
-                <h3>🔒 Rate Limiting</h3>
+                <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
+                <h3>Rate Limiting</h3>
                 <p>Built-in protection with automatic headers.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1rem 0;">
-                    <div style="font-family: 'Courier New', monospace; font-size: 1rem; line-height: 2; color: var(--primary); white-space: pre;">
-<span style="color: var(--accent-light);">X-RateLimit-Limit:</span> <span style="color: var(--warning);">100</span>
-<span style="color: var(--accent-light);">X-RateLimit-Remaining:</span> <span style="color: var(--warning);">87</span>
-<span style="color: var(--accent-light);">X-RateLimit-Reset:</span> <span style="color: var(--warning);">1730396400</span>
+                <div class="code-block">
+                    <code>X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 87
+X-RateLimit-Reset: 1730396400
 
-<span style="color: var(--text-tertiary);">// Automatic in all responses</span>
-                    </div>
+// Automatic in all responses</code>
                 </div>
             </div>
 
             <div class="card">
-                <h3>🛡️ Auto Sanitization</h3>
+                <div class="card-icon"><i class="fas fa-armor"></i></div>
+                <h3>Auto Sanitization</h3>
                 <p>Input validation and path traversal prevention built-in.</p>
-                <div class="code-block" style="margin: 1.5rem 0;">
+                <div class="code-block">
                     <code>// src/app/api/search.ts
 export default function handler(req, res) {
   const { q, limit = '10' } = req.query
-  // Auto-sanitized ✅
+  // Auto-sanitized ✓
   return { query: q, results: [] }
 }</code>
                 </div>
             </div>
 
             <div class="card">
-                <h3>⚡ Production Features</h3>
+                <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                <h3>Production Features</h3>
                 <p>Everything needed for enterprise APIs.</p>
                 <div style="margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
-                    <div>⏱️ 30s timeout</div>
-                    <div>📦 1MB body limit</div>
-                    <div>✅ Auto JSON</div>
-                    <div>💾 5min cache</div>
-                    <div>🔒 Sanitized</div>
-                    <div>🌐 Production</div>
+                    <div><i class="fas fa-hourglass"></i> 30s timeout</div>
+                    <div><i class="fas fa-boxes"></i> 1MB body limit</div>
+                    <div><i class="fas fa-check"></i> Auto JSON</div>
+                    <div><i class="fas fa-database"></i> 5min cache</div>
+                    <div><i class="fas fa-lock"></i> Sanitized</div>
+                    <div><i class="fas fa-server"></i> Production</div>
                 </div>
             </div>
         </div>
@@ -1261,7 +1168,7 @@ export default function handler(req, res) {
 
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">🔐</div>
+                <div class="feature-icon"><i class="fas fa-lock"></i></div>
                 <div class="feature-content">
                     <h4>Source Code Protection</h4>
                     <p>Advanced obfuscation and minification. Your code stays hidden from reverse engineering.</p>
@@ -1269,7 +1176,7 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">⚡</div>
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
                 <div class="feature-content">
                     <h4>Lightning-Fast Builds</h4>
                     <p>Vite-powered with sub-50ms HMR. Production builds under 1 second.</p>
@@ -1277,7 +1184,7 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">🛡️</div>
+                <div class="feature-icon"><i class="fas fa-shield"></i></div>
                 <div class="feature-content">
                     <h4>Enterprise Security</h4>
                     <p>Helmet headers, CORS, rate limiting, and graceful shutdown out of the box.</p>
@@ -1285,7 +1192,7 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">🎯</div>
+                <div class="feature-icon"><i class="fas fa-crosshairs"></i></div>
                 <div class="feature-content">
                     <h4>File-Based Routing</h4>
                     <p>Next.js-style organization. Create pages by adding files.</p>
@@ -1293,7 +1200,7 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">📊</div>
+                <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
                 <div class="feature-content">
                     <h4>Monitoring Ready</h4>
                     <p>Health checks, metrics endpoints, and intelligent port management.</p>
@@ -1301,7 +1208,7 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">🔌</div>
+                <div class="feature-icon"><i class="fas fa-plug"></i></div>
                 <div class="feature-content">
                     <h4>Full-Stack Development</h4>
                     <p>API routes work in dev, preview, and production. No separate backend needed.</p>
@@ -1309,7 +1216,7 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">🚀</div>
+                <div class="feature-icon"><i class="fas fa-rocket"></i></div>
                 <div class="feature-content">
                     <h4>Zero Configuration</h4>
                     <p>TypeScript and Tailwind CSS pre-configured. Start coding immediately.</p>
@@ -1317,7 +1224,7 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">💻</div>
+                <div class="feature-icon"><i class="fas fa-laptop-code"></i></div>
                 <div class="feature-content">
                     <h4>TypeScript Native</h4>
                     <p>Full TypeScript throughout. Type-safe pages, components, and APIs.</p>
@@ -1333,20 +1240,18 @@ export default function handler(req, res) {
             <p>Create your first app with a single command</p>
         </div>
 
-        <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(0, 217, 255, 0.3); border-radius: 16px; padding: 2.5rem; max-width: 700px; margin: 2rem auto; overflow-x: auto;">
-            <div style="font-family: 'Courier New', monospace; font-size: 1.15rem; line-height: 2.2; color: var(--primary); white-space: pre; letter-spacing: 0.3px;">
-<span style="color: var(--success);">$</span> <span style="color: var(--text-secondary);">npx create-bini-app@latest my-app</span>
-<span style="color: var(--success);">$</span> <span style="color: var(--text-secondary);">cd my-app</span>
-<span style="color: var(--success);">$</span> <span style="color: var(--text-secondary);">npm install</span>
-<span style="color: var(--success);">$</span> <span style="color: var(--text-secondary);">npm run dev</span>
+        <div class="code-block" style="max-width: 700px; margin: 2rem auto;">
+            <code>$ npx create-bini-app@latest my-app
+$ cd my-app
+$ npm install
+$ npm run dev
 
-<span style="color: var(--accent-light);"># Your app opens at http://localhost:3000 🎉</span>
-            </div>
+# Your app opens at http://localhost:3000</code>
         </div>
 
         <div class="features-grid" style="max-width: 900px; margin: 3rem auto;">
             <div class="feature-card">
-                <div class="feature-icon">📝</div>
+                <div class="feature-icon"><i class="fas fa-scroll"></i></div>
                 <div class="feature-content">
                     <h4>TypeScript + Tailwind</h4>
                     <p><code style="color: var(--primary); background: rgba(0,217,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">--typescript --tailwind</code></p>
@@ -1354,7 +1259,7 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">🎨</div>
+                <div class="feature-icon"><i class="fas fa-palette"></i></div>
                 <div class="feature-content">
                     <h4>CSS Modules</h4>
                     <p><code style="color: var(--primary); background: rgba(0,217,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">--css-modules</code></p>
@@ -1362,7 +1267,7 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">⚙️</div>
+                <div class="feature-icon"><i class="fas fa-gears"></i></div>
                 <div class="feature-content">
                     <h4>Custom Config</h4>
                     <p><code style="color: var(--primary); background: rgba(0,217,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">--force --skip-install</code></p>
@@ -1380,84 +1285,80 @@ export default function handler(req, res) {
 
         <div class="grid">
             <div class="card">
-                <h3>💻 Development</h3>
+                <div class="card-icon"><i class="fas fa-desktop"></i></div>
+                <h3>Development</h3>
                 <p>Fast feedback with HMR and automatic route discovery.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1rem 0;">
-                    <div style="font-family: 'Courier New', monospace; font-size: 1rem; line-height: 1.9; color: var(--primary); white-space: pre;">
-<span style="color: var(--success);">$</span> npm run dev
+                <div class="code-block">
+                    <code>$ npm run dev
 
-⚡ Sub-50ms HMR
-🔌 API routes work
-📋 Routes in menu
-                    </div>
+Sub-50ms HMR
+API routes work
+Routes in menu</code>
                 </div>
             </div>
 
             <div class="card">
-                <h3>👀 Preview</h3>
+                <div class="card-icon"><i class="fas fa-eye"></i></div>
+                <h3>Preview</h3>
                 <p>Test production build locally before deployment.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1rem 0;">
-                    <div style="font-family: 'Courier New', monospace; font-size: 1rem; line-height: 1.9; color: var(--primary); white-space: pre;">
-<span style="color: var(--success);">$</span> npm run preview
+                <div class="code-block">
+                    <code>$ npm run preview
 
-✅ Optimized bundle
-🔌 API routes work
-📱 Gzip enabled
-                    </div>
+Optimized bundle
+API routes work
+Gzip enabled</code>
                 </div>
             </div>
 
             <div class="card">
-                <h3>🏗️ Build</h3>
+                <div class="card-icon"><i class="fas fa-hammer"></i></div>
+                <h3>Build</h3>
                 <p>Optimized production bundle with minification.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1rem 0;">
-                    <div style="font-family: 'Courier New', monospace; font-size: 1rem; line-height: 1.9; color: var(--primary); white-space: pre;">
-<span style="color: var(--success);">$</span> npm run build
+                <div class="code-block">
+                    <code>$ npm run build
 
-✅ Minified JS
-✅ Code splitting
-✅ Tree shaking
-                    </div>
+Minified JS
+Code splitting
+Tree shaking</code>
                 </div>
             </div>
 
             <div class="card">
-                <h3>🚀 Production</h3>
+                <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                <h3>Production</h3>
                 <p>Fastify server with full features and monitoring.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1rem 0;">
-                    <div style="font-family: 'Courier New', monospace; font-size: 1rem; line-height: 1.9; color: var(--primary); white-space: pre;">
-<span style="color: var(--success);">$</span> npm start
+                <div class="code-block">
+                    <code>$ npm start
 
-⚡ 2x faster
-🔌 API routes
-📊 /health /metrics
-                    </div>
+2x faster
+API routes
+/health /metrics</code>
                 </div>
             </div>
 
             <div class="card">
-                <h3>☁️ Platforms</h3>
+                <div class="card-icon"><i class="fas fa-cloud"></i></div>
+                <h3>Platforms</h3>
                 <p>Deploy to any platform that supports Node.js.</p>
                 <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
-                    <div>✅ Vercel - Zero config</div>
-                    <div>✅ Netlify - Serverless</div>
-                    <div>✅ Docker - Containerized</div>
-                    <div>✅ Railway, Render, AWS</div>
+                    <div><i class="fas fa-check"></i> Vercel - Zero config</div>
+                    <div><i class="fas fa-check"></i> Netlify - Serverless</div>
+                    <div><i class="fas fa-check"></i> Docker - Containerized</div>
+                    <div><i class="fas fa-check"></i> Railway, Render, AWS</div>
                 </div>
             </div>
 
             <div class="card">
-                <h3>📊 SEO & Meta</h3>
+                <div class="card-icon"><i class="fas fa-magnifying-glass"></i></div>
+                <h3>SEO & Meta</h3>
                 <p>Define in root layout with automatic injection.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1rem 0;">
-                    <div style="font-family: 'Courier New', monospace; font-size: 0.95rem; line-height: 1.9; color: var(--primary); white-space: pre;">
-<span style="color: var(--accent-light);">export const</span> <span style="color: var(--primary);">metadata</span> = {
-  <span style="color: var(--primary);">title:</span> <span style="color: var(--success);">'My App'</span>,
-  <span style="color: var(--primary);">description:</span> <span style="color: var(--success);">'...'</span>,
-  <span style="color: var(--primary);">openGraph:</span> { <span style="color: var(--text-tertiary);">/* ... */</span> },
-  <span style="color: var(--primary);">twitter:</span> { <span style="color: var(--text-tertiary);">/* ... */</span> }
-}
-                    </div>
+                <div class="code-block">
+                    <code>export const metadata = {
+  title: 'My App',
+  description: '...',
+  openGraph: { /* ... */ },
+  twitter: { /* ... */ }
+}</code>
                 </div>
             </div>
         </div>
@@ -1474,17 +1375,17 @@ export default function handler(req, res) {
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
                     <span>What's new in v9.1.5?</span>
-                    <span class="accordion-icon">▼</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="accordion-content">
                     <p><strong>Major features released:</strong></p>
                     <ul>
-                        <li>🔌 <strong>TypeScript API Routes</strong> - Full .ts support with type safety</li>
-                        <li>📁 <strong>Unified File Structure</strong> - Next.js-compatible src/app/api</li>
-                        <li>⚡ <strong>Mixed Language Support</strong> - Use .ts and .js together</li>
-                        <li>🔗 <strong>Dynamic API Routes</strong> - Support [id] and [...slug] patterns</li>
-                        <li>🔥 <strong>Enhanced Hot Reload</strong> - Instant API updates</li>
-                        <li>📝 <strong>Improved DX</strong> - Better type hints and error messages</li>
+                        <li>TypeScript API Routes - Full .ts support with type safety</li>
+                        <li>Unified File Structure - Next.js-compatible src/app/api</li>
+                        <li>Mixed Language Support - Use .ts and .js together</li>
+                        <li>Dynamic API Routes - Support [id] and [...slug] patterns</li>
+                        <li>Enhanced Hot Reload - Instant API updates</li>
+                        <li>Improved DX - Better type hints and error messages</li>
                     </ul>
                 </div>
             </div>
@@ -1492,7 +1393,7 @@ export default function handler(req, res) {
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
                     <span>How do I create API routes?</span>
-                    <span class="accordion-icon">▼</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="accordion-content">
                     <p>Create files in <code>src/app/api/</code>:</p>
@@ -1508,17 +1409,17 @@ export default function handler(req, res) {
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
                     <span>Is Bini.js production-ready?</span>
-                    <span class="accordion-icon">▼</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="accordion-content">
                     <p><strong>Absolutely!</strong> Bini.js includes everything for production:</p>
                     <ul>
-                        <li>✅ Source code protection & obfuscation</li>
-                        <li>✅ Optimized builds with code splitting</li>
-                        <li>✅ Rate limiting & security headers</li>
-                        <li>✅ Health checks & monitoring</li>
-                        <li>✅ Graceful shutdown handling</li>
-                        <li>✅ HTTP/2 support</li>
+                        <li>Source code protection & obfuscation</li>
+                        <li>Optimized builds with code splitting</li>
+                        <li>Rate limiting & security headers</li>
+                        <li>Health checks & monitoring</li>
+                        <li>Graceful shutdown handling</li>
+                        <li>HTTP/2 support</li>
                     </ul>
                     <p>Deploy to Vercel, Netlify, or any platform with zero configuration.</p>
                 </div>
@@ -1527,18 +1428,18 @@ export default function handler(req, res) {
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
                     <span>How fast are the builds?</span>
-                    <span class="accordion-icon">▼</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="accordion-content">
                     <p><strong>Extremely fast!</strong> Here's why:</p>
                     <ul>
-                        <li>⚡ Vite: Sub-50ms HMR in development</li>
-                        <li>⚡ Fastify: 2x faster than Express (1000+ req/s)</li>
-                        <li>⚡ Builds: Under 1 second for most apps</li>
-                        <li>⚡ Tree shaking: Unused code removed</li>
-                        <li>⚡ Code splitting: Vendor code separated</li>
-                        <li>⚡ Gzip/Brotli: 70%+ compression</li>
-                        <li>⚡ HTTP/2: Full protocol support</li>
+                        <li>Vite: Sub-50ms HMR in development</li>
+                        <li>Fastify: 2x faster than Express (1000+ req/s)</li>
+                        <li>Builds: Under 1 second for most apps</li>
+                        <li>Tree shaking: Unused code removed</li>
+                        <li>Code splitting: Vendor code separated</li>
+                        <li>Gzip/Brotli: 70%+ compression</li>
+                        <li>HTTP/2: Full protocol support</li>
                     </ul>
                 </div>
             </div>
@@ -1546,7 +1447,7 @@ export default function handler(req, res) {
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
                     <span>Can I use both TypeScript and JavaScript?</span>
-                    <span class="accordion-icon">▼</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="accordion-content">
                     <p><strong>Yes!</strong> Mixed language support allows you to:</p>
@@ -1563,18 +1464,18 @@ export default function handler(req, res) {
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
                     <span>What security features are included?</span>
-                    <span class="accordion-icon">▼</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="accordion-content">
                     <p><strong>Production-grade security built-in:</strong></p>
                     <ul>
-                        <li>🔐 Rate Limiting - 100 req/15min per IP</li>
-                        <li>🔐 Helmet Headers - CSP, HSTS, X-Frame-Options</li>
-                        <li>🔐 Input Sanitization - Deep traversal checks</li>
-                        <li>🔐 Path Validation - Traversal prevention</li>
-                        <li>🔐 Prototype Pollution - Dangerous properties blocked</li>
-                        <li>🔐 Graceful Shutdown - 30s timeout</li>
-                        <li>🔐 Source Protection - Code obfuscation</li>
+                        <li>Rate Limiting - 100 req/15min per IP</li>
+                        <li>Helmet Headers - CSP, HSTS, X-Frame-Options</li>
+                        <li>Input Sanitization - Deep traversal checks</li>
+                        <li>Path Validation - Traversal prevention</li>
+                        <li>Prototype Pollution - Dangerous properties blocked</li>
+                        <li>Graceful Shutdown - 30s timeout</li>
+                        <li>Source Protection - Code obfuscation</li>
                     </ul>
                 </div>
             </div>
@@ -1582,17 +1483,17 @@ export default function handler(req, res) {
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
                     <span>Where can I deploy?</span>
-                    <span class="accordion-icon">▼</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="accordion-content">
                     <p><strong>Deploy anywhere with Node.js support:</strong></p>
                     <ul>
-                        <li>🚀 <strong>Vercel</strong> - Zero config deployment</li>
-                        <li>🚀 <strong>Netlify</strong> - Serverless functions</li>
-                        <li>🚀 <strong>Docker</strong> - Containerized apps</li>
-                        <li>🚀 <strong>Railway</strong> - GitHub integration</li>
-                        <li>🚀 <strong>Render</strong> - Native Node.js</li>
-                        <li>🚀 <strong>AWS, Google Cloud</strong> - Full support</li>
+                        <li>Vercel - Zero config deployment</li>
+                        <li>Netlify - Serverless functions</li>
+                        <li>Docker - Containerized apps</li>
+                        <li>Railway - GitHub integration</li>
+                        <li>Render - Native Node.js</li>
+                        <li>AWS, Google Cloud - Full support</li>
                     </ul>
                 </div>
             </div>
@@ -1603,21 +1504,21 @@ export default function handler(req, res) {
     <section class="cta-section" style="margin: 5rem auto; max-width: 900px;">
         <h3>Ready to Build Something Amazing?</h3>
         <p>Join thousands of developers building faster, more secure React applications with Bini.js. Get started in seconds.</p>
-        <button class="btn-primary" style="font-size: 1.05rem; padding: 1.1rem 3rem;">Start Building Now →</button>
+        <button class="btn-primary" style="font-size: 1.05rem; padding: 1.1rem 3rem; margin-top: 1rem;"><i class="fas fa-rocket"></i> Start Building Now</button>
     </section>
 
     <!-- Footer -->
     <footer>
         <p>© 2024 Bini.js. All rights reserved.</p>
-        <p>Built with ❤️ using Vite, React, TypeScript, and Fastify</p>
+        <p>Built with <i class="fas fa-heart" style="color: var(--primary);"></i> using Vite, React, TypeScript, and Fastify</p>
         <div class="footer-text">
-            <span>TypeScript API Routes</span>
+            <span><i class="fas fa-plug"></i> TypeScript API Routes</span>
             <span>•</span>
-            <span>Source Protection</span>
+            <span><i class="fas fa-lock"></i> Source Protection</span>
             <span>•</span>
-            <span>2x Faster Fastify</span>
+            <span><i class="fas fa-fire"></i> 2x Faster Fastify</span>
             <span>•</span>
-            <span>Production Ready</span>
+            <span><i class="fas fa-check-circle"></i> Production Ready</span>
         </div>
     </footer>
 
@@ -1648,6 +1549,13 @@ export default function handler(req, res) {
             navLinks.classList.toggle('active');
         });
 
+        // Close mobile menu when link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
         // Accordion
         function toggleAccordion(item) {
             document.querySelectorAll('.accordion-item').forEach(el => {
@@ -1659,9 +1567,7 @@ export default function handler(req, res) {
         // Smooth scroll for buttons
         document.querySelectorAll('button').forEach(btn => {
             btn.addEventListener('click', function() {
-                if (this.textContent.includes('View Docs')) {
-                    window.open('https://github.com/Binidu01/bini');
-                } else if (this.textContent.includes('Get Started') || this.textContent.includes('Start Building')) {
+                if (this.textContent.includes('View Docs') || this.textContent.includes('Get Started')) {
                     window.open('https://www.npmjs.com/package/create-bini-app');
                 }
             });
@@ -1676,7 +1582,7 @@ export default function handler(req, res) {
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.card, .feature-card').forEach(el => {
+        document.querySelectorAll('.card, .feature-card, .stat').forEach(el => {
             el.style.opacity = '0.8';
             observer.observe(el);
         });
@@ -1705,36 +1611,6 @@ export default function handler(req, res) {
                 behavior: 'smooth'
             });
         });
-
-        // Floating particles
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 20;
-
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            // Random size between 2px and 6px
-            const size = Math.random() * 4 + 2;
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            
-            // Random position
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-            
-            // Random animation duration between 10s and 30s
-            const duration = Math.random() * 20 + 10;
-            particle.style.animationDuration = `${duration}s`;
-            
-            // Random delay
-            const delay = Math.random() * 5;
-            particle.style.animationDelay = `${delay}s`;
-            
-            particlesContainer.appendChild(particle);
-        }
     </script>
 </body>
 </html>
-
-
