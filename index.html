@@ -68,6 +68,11 @@ body {
     to { opacity: 1; }
 }
 
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
 /* Navbar */
 header {
     position: fixed;
@@ -93,8 +98,9 @@ header.scrolled {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1.5rem;
+    padding: 1rem 2rem;
     width: 100%;
+    gap: 1rem;
 }
 
 .logo {
@@ -104,7 +110,7 @@ header.scrolled {
     font-weight: 800;
     font-size: 1.3rem;
     letter-spacing: -0.5px;
-    min-width: fit-content;
+    flex-shrink: 0;
 }
 
 .logo-icon {
@@ -137,7 +143,8 @@ header.scrolled {
     display: flex;
     gap: 1rem;
     align-items: center;
-    margin-left: auto;
+    justify-content: flex-end;
+    flex: 1;
 }
 
 .nav-links {
@@ -170,6 +177,7 @@ header.scrolled {
     transition: all 0.3s ease;
     box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .btn-nav:hover {
@@ -184,12 +192,14 @@ header.scrolled {
     color: var(--text-primary);
     font-size: 1.3rem;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 /* Mobile Menu */
 @media (max-width: 768px) {
     .navbar {
         padding: 0.8rem 1rem;
+        gap: 0.5rem;
     }
 
     .logo {
@@ -209,7 +219,6 @@ header.scrolled {
 
     .mobile-menu-btn {
         display: block;
-        margin-left: 0.5rem;
     }
 
     .nav-menu {
@@ -230,6 +239,7 @@ header.scrolled {
         transition: max-height 0.3s ease;
         padding: 0;
         border-top: 1px solid rgba(124, 58, 237, 0.2);
+        align-items: stretch;
     }
 
     .nav-links.active {
@@ -243,6 +253,7 @@ header.scrolled {
         text-align: left;
         width: 100%;
         font-size: 0.95rem;
+        border-bottom: 1px solid rgba(124, 58, 237, 0.1);
     }
 
     .nav-links a:hover {
@@ -289,11 +300,6 @@ header.scrolled {
     background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
 }
 
 .hero-content {
@@ -386,7 +392,7 @@ header.scrolled {
 /* Stats */
 .stats-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 1rem;
     max-width: 900px;
     margin: 0 auto;
@@ -604,6 +610,305 @@ footer p {
     background: var(--gradient);
     z-index: 1001;
 }
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(26, 31, 58, 0.7);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 40px rgba(0, 217, 255, 0.15);
+    background: rgba(124, 58, 237, 0.05);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    color: var(--dark-bg);
+}
+
+.feature-content h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.feature-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Accordion */
+.accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    background: rgba(26, 31, 58, 0.7);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.accordion-item:hover {
+    border-color: var(--primary);
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    background: rgba(124, 58, 237, 0.05);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    user-select: none;
+}
+
+.accordion-item.active .accordion-header {
+    background: rgba(124, 58, 237, 0.15);
+    color: var(--primary);
+}
+
+.accordion-icon {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 1.5rem;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 600px;
+    padding: 1.5rem;
+}
+
+.accordion-content p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.accordion-content ul {
+    margin-left: 1.5rem;
+}
+
+.accordion-content li {
+    color: var(--text-secondary);
+    margin-bottom: 0.8rem;
+    line-height: 1.8;
+    list-style: none;
+}
+
+.accordion-content li:before {
+    content: "→ ";
+    color: var(--primary);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.accordion-content code {
+    background: rgba(0, 217, 255, 0.1);
+    color: var(--primary);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .features-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .feature-content h4 {
+        font-size: 1rem;
+    }
+
+    .feature-content p {
+        font-size: 0.85rem;
+    }
+
+    .accordion-header {
+        padding: 1.2rem;
+    }
+
+    .accordion-content {
+        padding: 0 1.2rem;
+    }
+
+    .accordion-item.active .accordion-content {
+        padding: 1.2rem;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .hero {
+        padding: 5rem 1rem 1.5rem;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-cta {
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.85rem;
+    }
+
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+
+    .stat {
+        padding: 1rem 0.6rem;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
+    }
+
+    .section {
+        padding: 2.5rem 1rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .section-header p {
+        font-size: 0.85rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    .card h3 {
+        font-size: 1rem;
+    }
+
+    .card p {
+        font-size: 0.85rem;
+    }
+
+    .card-icon {
+        font-size: 1.5rem;
+    }
+
+    .card-badge {
+        font-size: 0.6rem;
+        padding: 0.25rem 0.6rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .feature-card {
+        flex-direction: column;
+        padding: 1.2rem;
+    }
+
+    .feature-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    .accordion-item {
+        margin-bottom: 0.8rem;
+    }
+
+    .accordion-header {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .accordion-content {
+        font-size: 0.85rem;
+    }
+
+    .accordion-content ul {
+        margin-left: 1rem;
+    }
+
+    .accordion-content li {
+        margin-bottom: 0.6rem;
+    }
+}
 </style>
 </head>
 <body>
@@ -722,6 +1027,514 @@ footer p {
         </div>
     </section>
 
+    <!-- File Structure -->
+    <section class="section" id="structure">
+        <div class="section-header">
+            <h2><span class="gradient-text">Unified File Structure</span></h2>
+            <p>Next.js-compatible organization for modern development</p>
+        </div>
+
+        <div style="background: rgba(26, 31, 58, 0.7); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 16px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0; backdrop-filter: blur(10px);">
+            <div style="font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; color: var(--primary); letter-spacing: 0.5px;">
+                <div><span style="color: #a78bfa;"><i class="fas fa-folder"></i> src/app/</span></div>
+                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">layout.tsx</span> <span style="color: #7a8896;"># Root layout</span></div>
+                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># Home page (/)</span></div>
+                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">about/</span></div>
+                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># /about</span></div>
+                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">blog/</span></div>
+                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">[slug]/</span></div>
+                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># /blog/:slug</span></div>
+                <div style="margin-left: 1.5rem; background: rgba(0, 217, 255, 0.1); padding: 0.8rem; border-left: 3px solid var(--primary); margin-top: 0.5rem; border-radius: 4px;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">api/</span> <span style="color: #00d084;"><i class="fas fa-star"></i> NEW</span></div>
+                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">hello.ts</span> <span style="color: #7a8896;"># TypeScript API</span></div>
+                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">users.ts</span> <span style="color: #7a8896;"># TypeScript API</span></div>
+                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">products/</span></div>
+                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">[id].ts</span> <span style="color: #7a8896;"># Dynamic route</span></div>
+                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">search/</span></div>
+                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">query.js</span> <span style="color: #7a8896;"># JavaScript API</span></div>
+                <div style="margin-left: 1.5rem; margin-top: 0.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">globals.css</span> <span style="color: #7a8896;"># Global styles</span></div>
+            </div>
+        </div>
+
+        <div class="features-grid" style="margin-top: 3rem;">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-check-double"></i></div>
+                <div class="feature-content">
+                    <h4>Auto-Discovered Routes</h4>
+                    <p>All routes automatically discovered and compiled at startup</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <div class="feature-content">
+                    <h4>Hot Reload</h4>
+                    <p>Instant updates in development with sub-50ms HMR</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                <div class="feature-content">
+                    <h4>Production Ready</h4>
+                    <p>Works seamlessly in dev, preview, and production</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-scroll"></i></div>
+                <div class="feature-content">
+                    <h4>Full TypeScript</h4>
+                    <p>Complete TypeScript support with zero configuration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Routes -->
+    <section class="section" id="api">
+        <div class="section-header">
+            <h2><span class="gradient-text">Type-Safe API Routes</span></h2>
+            <p>Create powerful endpoints with zero boilerplate</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-pen-fancy"></i></div>
+                <h3>Basic TypeScript API</h3>
+                <p>Simple endpoints with automatic JSON serialization and type safety.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">// src/app/api/users.ts
+import type { Request, Response } from 'fastify'
+
+export default function handler(
+  req: Request,
+  res: Response
+) {
+  return { users: [] }
+}</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-link"></i></div>
+                <h3>Dynamic Routes</h3>
+                <p>URL parameters with full type safety. Supports [id] and [...slug].</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">// src/app/api/products/[id].ts
+export default function handler(req, res) {
+  const { id } = req.query
+  return { 
+    product: { id, name: `Product ${id}` }
+  }
+}</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+                <h3>Request Methods</h3>
+                <p>Full REST support with GET, POST, PUT, DELETE, PATCH.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">export default function handler(req, res) {
+  switch (req.method) {
+    case 'GET': return { data: [] }
+    case 'POST': 
+      res.status(201)
+      return { created: true }
+    default: res.status(405)
+  }
+}</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
+                <h3>Rate Limiting</h3>
+                <p>Built-in protection with automatic headers.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 87
+X-RateLimit-Reset: 1730396400
+
+// Automatic in all responses</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-armor"></i></div>
+                <h3>Auto Sanitization</h3>
+                <p>Input validation and path traversal prevention built-in.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">// src/app/api/search.ts
+export default function handler(req, res) {
+  const { q, limit = '10' } = req.query
+  // Auto-sanitized ✓
+  return { query: q, results: [] }
+}</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                <h3>Production Features</h3>
+                <p>Everything needed for enterprise APIs.</p>
+                <div style="margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+                    <div><i class="fas fa-hourglass"></i> 30s timeout</div>
+                    <div><i class="fas fa-boxes"></i> 1MB body limit</div>
+                    <div><i class="fas fa-check"></i> Auto JSON</div>
+                    <div><i class="fas fa-database"></i> 5min cache</div>
+                    <div><i class="fas fa-lock"></i> Sanitized</div>
+                    <div><i class="fas fa-server"></i> Production</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Bini.js -->
+    <section class="section">
+        <div class="section-header">
+            <h2><span class="gradient-text">Why Choose Bini.js?</span></h2>
+            <p>Everything you need for production applications</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                <div class="feature-content">
+                    <h4>Source Code Protection</h4>
+                    <p>Advanced obfuscation and minification. Your code stays hidden from reverse engineering.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <div class="feature-content">
+                    <h4>Lightning-Fast Builds</h4>
+                    <p>Vite-powered with sub-50ms HMR. Production builds under 1 second.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-shield"></i></div>
+                <div class="feature-content">
+                    <h4>Enterprise Security</h4>
+                    <p>Helmet headers, CORS, rate limiting, and graceful shutdown out of the box.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-crosshairs"></i></div>
+                <div class="feature-content">
+                    <h4>File-Based Routing</h4>
+                    <p>Next.js-style organization. Create pages by adding files.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                <div class="feature-content">
+                    <h4>Monitoring Ready</h4>
+                    <p>Health checks, metrics endpoints, and intelligent port management.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-plug"></i></div>
+                <div class="feature-content">
+                    <h4>Full-Stack Development</h4>
+                    <p>API routes work in dev, preview, and production. No separate backend needed.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                <div class="feature-content">
+                    <h4>Zero Configuration</h4>
+                    <p>TypeScript and Tailwind CSS pre-configured. Start coding immediately.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-laptop-code"></i></div>
+                <div class="feature-content">
+                    <h4>TypeScript Native</h4>
+                    <p>Full TypeScript throughout. Type-safe pages, components, and APIs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started -->
+    <section class="section">
+        <div class="section-header">
+            <h2><span class="gradient-text">Get Started in Seconds</span></h2>
+            <p>Create your first app with a single command</p>
+        </div>
+
+        <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 2rem auto; max-width: 700px; position: relative;">
+            <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">$ npx create-bini-app@latest my-app
+$ cd my-app
+$ npm install
+$ npm run dev
+
+# Your app opens at http://localhost:3000</code>
+        </div>
+
+        <div class="features-grid" style="max-width: 900px; margin: 3rem auto;">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-scroll"></i></div>
+                <div class="feature-content">
+                    <h4>TypeScript + Tailwind</h4>
+                    <p><code style="color: var(--primary); background: rgba(0,217,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">--typescript --tailwind</code></p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                <div class="feature-content">
+                    <h4>CSS Modules</h4>
+                    <p><code style="color: var(--primary); background: rgba(0,217,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">--css-modules</code></p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-gears"></i></div>
+                <div class="feature-content">
+                    <h4>Custom Config</h4>
+                    <p><code style="color: var(--primary); background: rgba(0,217,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">--force --skip-install</code></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deployment -->
+    <section class="section">
+        <div class="section-header">
+            <h2><span class="gradient-text">Deploy Anywhere</span></h2>
+            <p>Production-ready commands for any platform</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-desktop"></i></div>
+                <h3>Development</h3>
+                <p>Fast feedback with HMR and automatic route discovery.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">$ npm run dev
+
+Sub-50ms HMR
+API routes work
+Routes in menu</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-eye"></i></div>
+                <h3>Preview</h3>
+                <p>Test production build locally before deployment.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">$ npm run preview
+
+Optimized bundle
+API routes work
+Gzip enabled</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-hammer"></i></div>
+                <h3>Build</h3>
+                <p>Optimized production bundle with minification.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">$ npm run build
+
+Minified JS
+Code splitting
+Tree shaking</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                <h3>Production</h3>
+                <p>Fastify server with full features and monitoring.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">$ npm start
+
+2x faster
+API routes
+/health /metrics</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-cloud"></i></div>
+                <h3>Platforms</h3>
+                <p>Deploy to any platform that supports Node.js.</p>
+                <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
+                    <div><i class="fas fa-check"></i> Vercel - Zero config</div>
+                    <div><i class="fas fa-check"></i> Netlify - Serverless</div>
+                    <div><i class="fas fa-check"></i> Docker - Containerized</div>
+                    <div><i class="fas fa-check"></i> Railway, Render, AWS</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-magnifying-glass"></i></div>
+                <h3>SEO & Meta</h3>
+                <p>Define in root layout with automatic injection.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">export const metadata = {
+  title: 'My App',
+  description: '...',
+  openGraph: { /* ... */ },
+  twitter: { /* ... */ }
+}</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+        <div class="section-header">
+            <h2><span class="gradient-text">Frequently Asked Questions</span></h2>
+            <p>Everything you need to know about Bini.js</p>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-item" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>What's new in v9.1.5?</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Major features released:</strong></p>
+                    <ul>
+                        <li>TypeScript API Routes - Full .ts support with type safety</li>
+                        <li>Unified File Structure - Next.js-compatible src/app/api</li>
+                        <li>Mixed Language Support - Use .ts and .js together</li>
+                        <li>Dynamic API Routes - Support [id] and [...slug] patterns</li>
+                        <li>Enhanced Hot Reload - Instant API updates</li>
+                        <li>Improved DX - Better type hints and error messages</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>How do I create API routes?</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="accordion-content">
+                    <p>Create files in <code>src/app/api/</code>:</p>
+                    <ul>
+                        <li><code>src/app/api/hello.ts</code> → /api/hello</li>
+                        <li><code>src/app/api/users.ts</code> → /api/users</li>
+                        <li><code>src/app/api/posts/[id].ts</code> → /api/posts/:id</li>
+                    </ul>
+                    <p>Each handler exports a default function that receives (req, res) and returns JSON.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>Is Bini.js production-ready?</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Absolutely!</strong> Bini.js includes everything for production:</p>
+                    <ul>
+                        <li>Source code protection & obfuscation</li>
+                        <li>Optimized builds with code splitting</li>
+                        <li>Rate limiting & security headers</li>
+                        <li>Health checks & monitoring</li>
+                        <li>Graceful shutdown handling</li>
+                        <li>HTTP/2 support</li>
+                    </ul>
+                    <p>Deploy to Vercel, Netlify, or any platform with zero configuration.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>How fast are the builds?</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Extremely fast!</strong> Here's why:</p>
+                    <ul>
+                        <li>Vite: Sub-50ms HMR in development</li>
+                        <li>Fastify: 2x faster than Express (1000+ req/s)</li>
+                        <li>Builds: Under 1 second for most apps</li>
+                        <li>Tree shaking: Unused code removed</li>
+                        <li>Code splitting: Vendor code separated</li>
+                        <li>Gzip/Brotli: 70%+ compression</li>
+                        <li>HTTP/2: Full protocol support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>Can I use both TypeScript and JavaScript?</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Yes!</strong> Mixed language support allows you to:</p>
+                    <ul>
+                        <li>Use .ts for type-safe routes</li>
+                        <li>Use .js for simple endpoints</li>
+                        <li>Mix in the same project</li>
+                        <li>Gradually migrate to TypeScript</li>
+                        <li>Import between .ts and .js files</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>What security features are included?</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Production-grade security built-in:</strong></p>
+                    <ul>
+                        <li>Rate Limiting - 100 req/15min per IP</li>
+                        <li>Helmet Headers - CSP, HSTS, X-Frame-Options</li>
+                        <li>Input Sanitization - Deep traversal checks</li>
+                        <li>Path Validation - Traversal prevention</li>
+                        <li>Prototype Pollution - Dangerous properties blocked</li>
+                        <li>Graceful Shutdown - 30s timeout</li>
+                        <li>Source Protection - Code obfuscation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>Where can I deploy?</span>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Deploy anywhere with Node.js support:</strong></p>
+                    <ul>
+                        <li>Vercel - Zero config deployment</li>
+                        <li>Netlify - Serverless functions</li>
+                        <li>Docker - Containerized apps</li>
+                        <li>Railway - GitHub integration</li>
+                        <li>Render - Native Node.js</li>
+                        <li>AWS, Google Cloud - Full support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="text-align: center; background: rgba(26, 31, 58, 0.7); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 20px; padding: 3rem 2rem; margin: 5rem auto; max-width: 900px; backdrop-filter: blur(10px); position: relative; overflow: hidden;">
+        <h3 style="font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 900; margin-bottom: 1rem; position: relative; z-index: 2;">Ready to Build Something Amazing?</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; position: relative; z-index: 2;">Join thousands of developers building faster, more secure React applications with Bini.js. Get started in seconds.</p>
+        <button class="btn-primary" style="font-size: 1.05rem; padding: 1.1rem 3rem; margin-top: 1rem;"><i class="fas fa-rocket"></i> Start Building Now</button>
+    </section>
+
     <!-- Footer -->
     <footer>
         <p>© 2024 Bini.js. All rights reserved.</p>
@@ -739,65 +1552,102 @@ footer p {
     <div class="back-to-top" id="back-to-top">
         <i class="fas fa-arrow-up"></i>
     </div>
+<script>
+    // Loading screen
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loading').classList.add('hidden');
+        }, 1000);
+    });
 
-    <script>
-        // Loading screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loading').classList.add('hidden');
-            }, 1000);
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Close menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
         });
+    });
 
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-        });
+    // Progress bar
+    window.addEventListener('scroll', () => {
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
 
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const navLinks = document.getElementById('nav-links');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+    // Back to top
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
 
-        // Close menu on link click
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // CTA buttons
+    document.querySelectorAll('button').forEach(btn => {
+        if (btn.textContent.includes('Start Building') || btn.textContent.includes('View Docs')) {
+            btn.addEventListener('click', () => {
+                window.open('https://www.npmjs.com/package/create-bini-app');
             });
-        });
+        }
+    });
 
-        // Progress bar
-        window.addEventListener('scroll', () => {
-            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (window.scrollY / windowHeight) * 100;
-            document.getElementById('progress-bar').style.width = scrolled + '%';
-        });
-
-        // Back to top
-        const backToTop = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
+    // Accordion functionality - ADD THIS FUNCTION
+    function toggleAccordion(element) {
+        // Close all other accordion items
+        document.querySelectorAll('.accordion-item').forEach(item => {
+            if (item !== element) {
+                item.classList.remove('active');
             }
         });
+        
+        // Toggle the clicked item
+        element.classList.toggle('active');
+    }
 
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // CTA buttons
-        document.querySelectorAll('button').forEach(btn => {
-            if (btn.textContent.includes('Start Building') || btn.textContent.includes('View Docs')) {
-                btn.addEventListener('click', () => {
-                    window.open('https://www.npmjs.com/package/create-bini-app');
-                });
+    // Optional: Add keyboard accessibility for accordion
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const accordionItem = header.parentElement;
+                toggleAccordion(accordionItem);
             }
         });
-    </script>
+        
+        // Add tabindex for accessibility
+        header.setAttribute('tabindex', '0');
+        header.setAttribute('role', 'button');
+        header.setAttribute('aria-expanded', 'false');
+    });
+
+    // Update aria-expanded attribute when accordion items are toggled
+    document.querySelectorAll('.accordion-item').forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        item.addEventListener('click', () => {
+            const isExpanded = item.classList.contains('active');
+            header.setAttribute('aria-expanded', isExpanded.toString());
+        });
+    });
+</script>
 </body>
 </html>
