@@ -1,6 +1,13 @@
+# Allow all search engines to crawl everything
 User-agent: *
 Allow: /
+
+# Block irrelevant or sensitive directories
 Disallow: /node_modules/
 Disallow: /.github/
+Disallow: /scripts/
+Disallow: /tests/
+Disallow: /*.log$
 
+# Sitemap location for faster indexing
 Sitemap: https://bini.js.org/sitemap.xml
