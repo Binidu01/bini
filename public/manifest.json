@@ -1,0 +1,23 @@
+{
+  "name": "Bini.js",
+  "short_name": "Bini.js",
+  "description": "Enterprise React framework with TypeScript API routes, unified file structure, 2× faster Fastify, source protection, and zero-config setup.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#00d9ff",
+  "background_color": "#0a0e27",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://cdn.jsdelivr.net/gh/Binidu01/bini/public/favicon.ico?v=20251113v1",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "https://cdn.jsdelivr.net/gh/Binidu01/bini/public/og-image.png?v=20251113v1",
+      "sizes": "1200x630",
+      "type": "image/png"
+    }
+  ]
+}
