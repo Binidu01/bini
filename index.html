@@ -3,32 +3,24 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bini.js v9.1.5 — Professional React Framework with TypeScript API Routes</title>
+<title>Bini.js v9.2.2 — Production-Ready React Framework with Dynamic Code Splitting & Custom 404 Pages</title>
 
-<!-- SEO & Brand Keywords (all Bini.js variants) -->
-<meta name="description" content="Bini.js: Enterprise-grade React framework featuring TypeScript API routes, unified file structure, 2× faster Fastify performance, advanced source protection, and zero-config setup for modern web applications." />
-<meta name="keywords" content="
-Bini.js, BiniJS, BINI.JS, bini.js, biniJS, Bini.Js, bINI.jS, BINi.js, BINi.JS,
-React framework, TypeScript, API routes, Fastify, source protection, zero-config, full-stack development, enterprise React
-" />
+<!-- SEO & Brand Keywords -->
+<meta name="description" content="Bini.js v9.2.2: Enterprise React framework with custom 404 pages, dynamic code splitting, universal deployment, and TypeScript API routes. 64% smaller bundles, 65% faster load times." />
+<meta name="keywords" content="Bini.js, React framework, TypeScript, API routes, Fastify, custom 404 pages, dynamic imports, code splitting, universal deployment, Vercel, Netlify" />
 <meta name="author" content="Bini.js" />
 <meta name="site_name" content="Bini.js" />
 <meta name="application-name" content="Bini.js" />
 <meta name="robots" content="index, follow" />
 <meta name="language" content="en" />
 
-<!-- Version number for cache-busting -->
-<script>
-  const OG_VERSION = "20251113v1"; // increment this whenever you update the image
-</script>
-
 <!-- Open Graph -->
 <meta property="og:site_name" content="Bini.js" />
-<meta property="og:title" content="Bini.js v9.1.5 — Professional React Framework with TypeScript API Routes" />
-<meta property="og:description" content="Enterprise-grade React framework with TypeScript API routes, unified file structure, 2× faster Fastify, advanced source protection, and zero-config setup." />
+<meta property="og:title" content="Bini.js v9.2.2 — Production-Ready React Framework with Dynamic Code Splitting & Custom 404 Pages" />
+<meta property="og:description" content="Enterprise React framework with custom 404 pages, dynamic code splitting, universal deployment, and TypeScript API routes. 64% smaller bundles, 65% faster load times." />
 <meta property="og:url" content="https://bini.js.org/" />
 <meta property="og:type" content="website" />
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Binidu01/bini/public/og-image.png?v=20251113v1" />
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Binidu01/bini/public/og-image.png?v=20251113v2" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:type" content="image/png" />
@@ -36,11 +28,10 @@ React framework, TypeScript, API routes, Fastify, source protection, zero-config
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Bini.js v9.1.5 — Professional React Framework with TypeScript" />
-<meta name="twitter:description" content="Enterprise React framework with TypeScript API routes, 2× faster Fastify, source protection, and zero-config setup for modern applications." />
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Binidu01/bini/public/og-image.png?v=20251113v1" />
+<meta name="twitter:title" content="Bini.js v9.2.2 — Production-Ready React Framework with Dynamic Code Splitting" />
+<meta name="twitter:description" content="Enterprise React framework with custom 404 pages, dynamic code splitting, universal deployment, and TypeScript API routes." />
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Binidu01/bini/public/og-image.png?v=20251113v2" />
 <meta name="twitter:image:alt" content="Bini.js Framework" />
-<meta name="twitter:site" content="@your_twitter_handle" />
 
 <!-- Structured Data -->
 <script type="application/ld+json">
@@ -48,8 +39,8 @@ React framework, TypeScript, API routes, Fastify, source protection, zero-config
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Bini.js",
-  "version": "9.1.5",
-  "description": "Enterprise-grade React framework with TypeScript API routes and zero-config setup",
+  "version": "9.2.2",
+  "description": "Enterprise-grade React framework with TypeScript API routes, custom 404 pages, dynamic code splitting and zero-config setup",
   "url": "https://bini.js.org",
   "applicationCategory": "DeveloperApplication",
   "offers": {
@@ -62,23 +53,16 @@ React framework, TypeScript, API routes, Fastify, source protection, zero-config
     "name": "Bini.js",
     "url": "https://bini.js.org"
   },
-  "image": "https://cdn.jsdelivr.net/gh/Binidu01/bini/public/og-image.png?v=20251113v1"
+  "image": "https://cdn.jsdelivr.net/gh/Binidu01/bini/public/og-image.png?v=20251113v2"
 }
 </script>
 
 <!-- Canonical -->
 <link rel="canonical" href="https://bini.js.org/" />
 
-<!-- Manifest & Icons -->
-<link rel="manifest" href="https://cdn.jsdelivr.net/gh/Binidu01/bini/public/manifest.json" />
-<link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/Binidu01/bini/public/favicon.ico?v=20251113v1">
-<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/Binidu01/bini/public/favicon.ico?v=20251113v1">
-
-<!-- Fonts & Icons -->
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 * {
@@ -567,9 +551,10 @@ header.scrolled {
 }
 
 .card-icon {
-    font-size: 2rem;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
     color: var(--primary);
-    margin-bottom: 0.8rem;
 }
 
 .card h3 {
@@ -718,9 +703,13 @@ footer p {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
     flex-shrink: 0;
     color: var(--dark-bg);
+}
+
+.feature-icon svg {
+    width: 28px;
+    height: 28px;
 }
 
 .feature-content h4 {
@@ -773,7 +762,8 @@ footer p {
 }
 
 .accordion-icon {
-    font-size: 1rem;
+    width: 16px;
+    height: 16px;
     transition: transform 0.3s ease;
 }
 
@@ -826,6 +816,108 @@ footer p {
     font-family: 'Courier New', monospace;
 }
 
+/* Performance metrics */
+.performance-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.metric-card {
+    background: rgba(26, 31, 58, 0.7);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 900;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Deployment cards */
+.deployment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.deployment-card {
+    background: rgba(26, 31, 58, 0.7);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.deployment-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+}
+
+.deployment-card h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.deployment-card h4 svg {
+    width: 24px;
+    height: 24px;
+    color: var(--primary);
+}
+
+.deployment-card code {
+    background: rgba(10, 14, 39, 0.9);
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    display: block;
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--primary);
+}
+
+.deployment-card .note {
+    background: rgba(0, 217, 255, 0.1);
+    border-left: 3px solid var(--primary);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+.deployment-card .note.warning {
+    background: rgba(255, 193, 7, 0.1);
+    border-left-color: #ffc107;
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .features-grid {
@@ -841,7 +933,11 @@ footer p {
     .feature-icon {
         width: 50px;
         height: 50px;
-        font-size: 1.5rem;
+    }
+
+    .feature-icon svg {
+        width: 24px;
+        height: 24px;
     }
 
     .feature-content h4 {
@@ -865,7 +961,6 @@ footer p {
     }
 }
 
-/* Mobile adjustments */
 @media (max-width: 480px) {
     .hero {
         padding: 5rem 1rem 1.5rem;
@@ -937,7 +1032,8 @@ footer p {
     }
 
     .card-icon {
-        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
     }
 
     .card-badge {
@@ -958,7 +1054,11 @@ footer p {
     .feature-icon {
         width: 45px;
         height: 45px;
-        font-size: 1.2rem;
+    }
+
+    .feature-icon svg {
+        width: 20px;
+        height: 20px;
     }
 
     .accordion-item {
@@ -999,18 +1099,26 @@ footer p {
             <div class="logo">
                 <div class="logo-icon">ß</div>
                 <span>Bini.js</span>
-                <span class="version-badge">v9.1.5</span>
+                <span class="version-badge">v9.2.2</span>
             </div>
             <nav class="nav-menu">
                 <div class="nav-links" id="nav-links">
                     <a href="#features">Features</a>
                     <a href="#structure">Structure</a>
                     <a href="#api">API Routes</a>
+                    <a href="#deployment">Deployment</a>
                     <a href="#faq">FAQ</a>
                 </div>
-                <button class="btn-nav" onclick="window.open('https://www.npmjs.com/package/create-bini-app')"><i class="fas fa-arrow-right"></i> Get Started</button>
+                <button class="btn-nav" onclick="window.open('https://www.npmjs.com/package/create-bini-app')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M5 12h14m-7-7l7 7-7 7"/>
+                    </svg>
+                    Get Started
+                </button>
                 <button class="mobile-menu-btn" id="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 12h18M3 6h18M3 18h18"/>
+                    </svg>
                 </button>
             </nav>
         </div>
@@ -1019,26 +1127,41 @@ footer p {
     <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <h1><span style="color: var(--text-primary);">Bini.js</span> — Build <span class="gradient-text">Production-Ready</span> React Apps Lightning Fast</h1>
-            <p class="hero-subtitle">TypeScript API routes, unified file structure, 2x faster Fastify server, and enterprise-grade source protection. Zero configuration needed.</p>
+            <h1><span style="color: var(--text-primary);">Bini.js v9.2.2</span> — <span class="gradient-text">Production-Ready</span> React Framework</h1>
+            <p class="hero-subtitle">Custom 404 pages, dynamic code splitting, universal deployment, and TypeScript API routes. 64% smaller bundles, 65% faster load times.</p>
             
             <div class="hero-cta">
-                <button class="btn-primary"><i class="fas fa-code"></i> Start Building</button>
-                <button class="btn-secondary"><i class="fas fa-book"></i> View Docs</button>
+                <button class="btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    Start Building
+                </button>
+                <button class="btn-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                    View Docs
+                </button>
             </div>
 
             <div class="stats-container">
                 <div class="stat">
-                    <div class="stat-value">2x</div>
-                    <div class="stat-label">Faster Server</div>
+                    <div class="stat-value">64%</div>
+                    <div class="stat-label">Smaller Bundles</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value">&lt;1s</div>
-                    <div class="stat-label">Build Time</div>
+                    <div class="stat-value">65%</div>
+                    <div class="stat-label">Faster Load</div>
                 </div>
                 <div class="stat">
                     <div class="stat-value">100%</div>
-                    <div class="stat-label">Type Safe</div>
+                    <div class="stat-label">Universal</div>
                 </div>
                 <div class="stat">
                     <div class="stat-value">0</div>
@@ -1051,51 +1174,103 @@ footer p {
     <!-- What's New -->
     <section class="section" id="features">
         <div class="section-header">
-            <h2><span class="gradient-text">What's New in v9.1.5</span></h2>
+            <h2><span class="gradient-text">What's New in v9.2.2</span></h2>
             <p>Revolutionary features that redefine React development</p>
         </div>
 
         <div class="grid">
             <div class="card">
                 <span class="card-badge">NEW</span>
-                <div class="card-icon"><i class="fas fa-plug"></i></div>
-                <h3>TypeScript API Routes</h3>
-                <p>Create type-safe API endpoints with full TypeScript support. Automatic compilation and hot reload during development.</p>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                </div>
+                <h3>Custom 404 Pages</h3>
+                <p>Create beautiful not-found.tsx/jsx pages that display when routes don't exist. Works in dev, preview, and production.</p>
             </div>
 
             <div class="card">
                 <span class="card-badge">NEW</span>
-                <div class="card-icon"><i class="fas fa-folder-tree"></i></div>
-                <h3>Unified File Structure</h3>
-                <p>Next.js-compatible src/app/ directory with pages and API routes. Dynamic routes [id] and catch-all [...slug] patterns.</p>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M16 18l6-6-6-6"/>
+                        <path d="M8 6l-6 6 6 6"/>
+                    </svg>
+                </div>
+                <h3>Dynamic Code Splitting</h3>
+                <p>Automatic code splitting across all servers. Lazy-loaded routes reduce initial load by 64%.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-badge">NEW</span>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                </div>
+                <h3>Universal Deployment</h3>
+                <p>Works on GitHub Pages, Netlify, Vercel & more. All platforms automatically benefit from dynamic code splitting.</p>
             </div>
 
             <div class="card">
                 <span class="card-badge">IMPROVED</span>
-                <div class="card-icon"><i class="fas fa-code-merge"></i></div>
-                <h3>Mixed Language Support</h3>
-                <p>Use .ts and .js files in the same project. Automatic compilation with full IntelliSense support.</p>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polyline points="13 3 13 10 19 10"/>
+                        <path d="M22 16.92V19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2.08"/>
+                        <path d="M18 12A6 6 0 0 0 6 12v4h12z"/>
+                    </svg>
+                </div>
+                <h3>Improved Bundle Size</h3>
+                <p>Lazy-loaded routes reduce initial load. 64% smaller initial bundles with automatic optimization.</p>
             </div>
 
             <div class="card">
                 <span class="card-badge">IMPROVED</span>
-                <div class="card-icon"><i class="fas fa-lock"></i></div>
-                <h3>Enhanced Security</h3>
-                <p>Rate limiting (100 req/15min), Helmet headers, path traversal prevention, input sanitization, and prototype pollution protection.</p>
-            </div>
-
-            <div class="card">
-                <span class="card-badge">IMPROVED</span>
-                <div class="card-icon"><i class="fas fa-fire"></i></div>
-                <h3>Fastify Server</h3>
-                <p>2x faster than Express. HTTP/2 support, health checks (/health), metrics (/metrics), and graceful shutdown.</p>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
+                <h3>Production-Ready</h3>
+                <p>Zero config needed for major hosting platforms. Works seamlessly on all major platforms.</p>
             </div>
 
             <div class="card">
                 <span class="card-badge">CORE</span>
-                <div class="card-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
+                        <path d="M12 8l4 4-4 4-4-4z"/>
+                    </svg>
+                </div>
                 <h3>Zero Configuration</h3>
                 <p>Sensible defaults for TypeScript, Tailwind CSS, and modern tooling. Works out of the box.</p>
+            </div>
+        </div>
+
+        <!-- Performance Metrics -->
+        <div class="performance-metrics">
+            <div class="metric-card">
+                <div class="metric-value">245KB → 89KB</div>
+                <div class="metric-label">Initial Bundle Size</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">2.3s → 0.8s</div>
+                <div class="metric-label">First Page Load</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">2.1s → 0.3s</div>
+                <div class="metric-label">Blog Page Load</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">2.8s → 0.9s</div>
+                <div class="metric-label">Dashboard Load</div>
             </div>
         </div>
     </section>
@@ -1109,15 +1284,22 @@ footer p {
 
         <div style="background: rgba(26, 31, 58, 0.7); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 16px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0; backdrop-filter: blur(10px);">
             <div style="font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; color: var(--primary); letter-spacing: 0.5px;">
-                <div><span style="color: #a78bfa;"><i class="fas fa-folder"></i> src/app/</span></div>
+                <div><span style="color: #a78bfa;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: inline; margin-right: 8px;">
+                        <path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-6"/>
+                        <polyline points="10 2 10 4 20 4 20 14 22 14 22 2"/>
+                    </svg>
+                    src/app/
+                </span></div>
                 <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">layout.tsx</span> <span style="color: #7a8896;"># Root layout</span></div>
                 <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># Home page (/)</span></div>
+                <div style="margin-left: 1.5rem; background: rgba(0, 217, 255, 0.1); padding: 0.8rem; border-left: 3px solid var(--primary); margin-top: 0.5rem; border-radius: 4px;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">not-found.tsx</span> <span style="color: #00d084;">★ NEW Custom 404</span></div>
                 <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">about/</span></div>
                 <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># /about</span></div>
                 <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">blog/</span></div>
                 <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">[slug]/</span></div>
                 <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># /blog/:slug</span></div>
-                <div style="margin-left: 1.5rem; background: rgba(0, 217, 255, 0.1); padding: 0.8rem; border-left: 3px solid var(--primary); margin-top: 0.5rem; border-radius: 4px;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">api/</span> <span style="color: #00d084;"><i class="fas fa-star"></i> NEW</span></div>
+                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">api/</span></div>
                 <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">hello.ts</span> <span style="color: #7a8896;"># TypeScript API</span></div>
                 <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">users.ts</span> <span style="color: #7a8896;"># TypeScript API</span></div>
                 <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">products/</span></div>
@@ -1130,28 +1312,50 @@ footer p {
 
         <div class="features-grid" style="margin-top: 3rem;">
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-check-double"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polyline points="9 11 12 14 22 4"/>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>Auto-Discovered Routes</h4>
                     <p>All routes automatically discovered and compiled at startup</p>
                 </div>
             </div>
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>Hot Reload</h4>
                     <p>Instant updates in development with sub-50ms HMR</p>
                 </div>
             </div>
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M16 18l6-6-6-6"/>
+                        <path d="M8 6l-6 6 6 6"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
-                    <h4>Production Ready</h4>
-                    <p>Works seamlessly in dev, preview, and production</p>
+                    <h4>Dynamic Imports</h4>
+                    <p>Automatic code splitting for all routes</p>
                 </div>
             </div>
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-scroll"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polyline points="14 2 14 8 20 8"/>
+                        <path d="M16 13H8"/>
+                        <path d="M16 17H8"/>
+                        <path d="M10 9H8"/>
+                        <path d="M20 4v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l4 4z"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>Full TypeScript</h4>
                     <p>Complete TypeScript support with zero configuration</p>
@@ -1169,7 +1373,14 @@ footer p {
 
         <div class="grid">
             <div class="card">
-                <div class="card-icon"><i class="fas fa-pen-fancy"></i></div>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                        <path d="M2 2l7.586 7.586"/>
+                        <circle cx="11" cy="11" r="2"/>
+                    </svg>
+                </div>
                 <h3>Basic TypeScript API</h3>
                 <p>Simple endpoints with automatic JSON serialization and type safety.</p>
                 <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
@@ -1186,7 +1397,14 @@ export default function handler(
             </div>
 
             <div class="card">
-                <div class="card-icon"><i class="fas fa-link"></i></div>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="7" cy="7" r="2"/>
+                        <circle cx="17" cy="17" r="2"/>
+                        <path d="M7 17l5-5 5 5"/>
+                        <path d="M17 7l-5 5-5-5"/>
+                    </svg>
+                </div>
                 <h3>Dynamic Routes</h3>
                 <p>URL parameters with full type safety. Supports [id] and [...slug].</p>
                 <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
@@ -1201,7 +1419,13 @@ export default function handler(req, res) {
             </div>
 
             <div class="card">
-                <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="16"/>
+                        <line x1="8" y1="12" x2="16" y2="12"/>
+                    </svg>
+                </div>
                 <h3>Request Methods</h3>
                 <p>Full REST support with GET, POST, PUT, DELETE, PATCH.</p>
                 <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
@@ -1218,7 +1442,11 @@ export default function handler(req, res) {
             </div>
 
             <div class="card">
-                <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
                 <h3>Rate Limiting</h3>
                 <p>Built-in protection with automatic headers.</p>
                 <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
@@ -1231,7 +1459,13 @@ X-RateLimit-Reset: 1730396400
             </div>
 
             <div class="card">
-                <div class="card-icon"><i class="fas fa-armor"></i></div>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <circle cx="12" cy="5" r="2"/>
+                        <path d="M12 7v4"/>
+                    </svg>
+                </div>
                 <h3>Auto Sanitization</h3>
                 <p>Input validation and path traversal prevention built-in.</p>
                 <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
@@ -1245,16 +1479,134 @@ export default function handler(req, res) {
             </div>
 
             <div class="card">
-                <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
                 <h3>Production Features</h3>
                 <p>Everything needed for enterprise APIs.</p>
                 <div style="margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
-                    <div><i class="fas fa-hourglass"></i> 30s timeout</div>
-                    <div><i class="fas fa-boxes"></i> 1MB body limit</div>
-                    <div><i class="fas fa-check"></i> Auto JSON</div>
-                    <div><i class="fas fa-database"></i> 5min cache</div>
-                    <div><i class="fas fa-lock"></i> Sanitized</div>
-                    <div><i class="fas fa-server"></i> Production</div>
+                    <div>⏱️ 30s timeout</div>
+                    <div>📦 1MB body limit</div>
+                    <div>✅ Auto JSON</div>
+                    <div>💾 5min cache</div>
+                    <div>🔒 Sanitized</div>
+                    <div>🚀 Production</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deployment -->
+    <section class="section" id="deployment">
+        <div class="section-header">
+            <h2><span class="gradient-text">Universal Deployment</span></h2>
+            <p>Deploy your Bini.js apps anywhere with ease</p>
+        </div>
+
+        <div class="deployment-grid">
+            <div class="deployment-card">
+                <h4>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/>
+                        <line x1="8" y1="16" x2="8.01" y2="16"/>
+                        <line x1="8" y1="20" x2="8.01" y2="20"/>
+                        <line x1="12" y1="18" x2="12.01" y2="18"/>
+                        <line x1="12" y1="22" x2="12.01" y2="22"/>
+                        <line x1="16" y1="16" x2="16.01" y2="16"/>
+                        <line x1="16" y1="20" x2="16.01" y2="20"/>
+                    </svg>
+                    Node.js Servers
+                </h4>
+                <p>All Node.js servers can publish Bini.js applications with full functionality:</p>
+                <code>npm run build
+npm run start</code>
+                <p>Works on Heroku, Railway, Render, AWS, Google Cloud, and any platform with Node.js support.</p>
+            </div>
+
+            <div class="deployment-card">
+                <h4>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7 9l5 5 5-5"/>
+                        <path d="M7 15l5 5 5-5"/>
+                    </svg>
+                    Vercel Deployment
+                </h4>
+                <p>Deploy to Vercel with zero configuration:</p>
+                <code># 1. Push to GitHub
+git push origin main
+
+# 2. Connect repo in Vercel dashboard
+# 3. Automatic deployments on every push</code>
+                <p>Vercel automatically detects Bini.js and configures everything.</p>
+            </div>
+
+            <div class="deployment-card">
+                <h4>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                    </svg>
+                    Netlify Deployment
+                </h4>
+                <p>Deploy to Netlify in minutes:</p>
+                <code># Build command:
+npm run build
+
+# Publish directory:
+.bini/dist</code>
+                <p>Connect your GitHub repo or drag & drop the .bini/dist folder.</p>
+            </div>
+
+            <div class="deployment-card">
+                <h4>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    GitHub Codespaces
+                </h4>
+                <p>✅ Working perfectly in GitHub Codespaces</p>
+                <code># Open in Codespaces
+# Run development server:
+npm run dev</code>
+                <p>Full development experience with hot reload and all features.</p>
+            </div>
+
+            <div class="deployment-card">
+                <h4>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    GitHub Pages
+                </h4>
+                <p>⚠️ Currently not working with GitHub Pages</p>
+                <code># Static deployment limitation
+# API routes require server runtime</code>
+                <div class="note warning">
+                    <strong>Note:</strong> Bini.js applications cannot currently be published to static servers like GitHub Pages. We're working on this functionality and it will be available in future updates.
+                </div>
+            </div>
+
+            <div class="deployment-card">
+                <h4>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    Coming Soon
+                </h4>
+                <p>We're actively working on expanding deployment options:</p>
+                <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                    <li>Static site generation for GitHub Pages</li>
+                    <li>Docker containerization</li>
+                    <li>Edge runtime compatibility</li>
+                    <li>More platform-specific optimizations</li>
+                </ul>
+                <div class="note">
+                    <strong>Stay tuned</strong> for updates on static server deployment capabilities.
                 </div>
             </div>
         </div>
@@ -1269,7 +1621,13 @@ export default function handler(req, res) {
 
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <circle cx="12" cy="5" r="2"/>
+                        <path d="M12 7v4"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>Source Code Protection</h4>
                     <p>Advanced obfuscation and minification. Your code stays hidden from reverse engineering.</p>
@@ -1277,7 +1635,11 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>Lightning-Fast Builds</h4>
                     <p>Vite-powered with sub-50ms HMR. Production builds under 1 second.</p>
@@ -1285,7 +1647,11 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-shield"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>Enterprise Security</h4>
                     <p>Helmet headers, CORS, rate limiting, and graceful shutdown out of the box.</p>
@@ -1293,7 +1659,12 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-crosshairs"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>File-Based Routing</h4>
                     <p>Next.js-style organization. Create pages by adding files.</p>
@@ -1301,7 +1672,11 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>Monitoring Ready</h4>
                     <p>Health checks, metrics endpoints, and intelligent port management.</p>
@@ -1309,7 +1684,16 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-plug"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
+                        <polyline points="7.5 19.79 7.5 14.6 3 12"/>
+                        <polyline points="21 12 16.5 14.6 16.5 19.79"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>Full-Stack Development</h4>
                     <p>API routes work in dev, preview, and production. No separate backend needed.</p>
@@ -1317,7 +1701,11 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>Zero Configuration</h4>
                     <p>TypeScript and Tailwind CSS pre-configured. Start coding immediately.</p>
@@ -1325,7 +1713,15 @@ export default function handler(req, res) {
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-laptop-code"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polyline points="14 2 14 8 20 8"/>
+                        <path d="M16 13H8"/>
+                        <path d="M16 17H8"/>
+                        <path d="M10 9H8"/>
+                        <path d="M20 4v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l4 4z"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>TypeScript Native</h4>
                     <p>Full TypeScript throughout. Type-safe pages, components, and APIs.</p>
@@ -1352,7 +1748,15 @@ $ npm run dev
 
         <div class="features-grid" style="max-width: 900px; margin: 3rem auto;">
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-scroll"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polyline points="14 2 14 8 20 8"/>
+                        <path d="M16 13H8"/>
+                        <path d="M16 17H8"/>
+                        <path d="M10 9H8"/>
+                        <path d="M20 4v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l4 4z"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>TypeScript + Tailwind</h4>
                     <p><code style="color: var(--primary); background: rgba(0,217,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">--typescript --tailwind</code></p>
@@ -1360,7 +1764,14 @@ $ npm run dev
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>CSS Modules</h4>
                     <p><code style="color: var(--primary); background: rgba(0,217,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">--css-modules</code></p>
@@ -1368,98 +1779,15 @@ $ npm run dev
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-gears"></i></div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                </div>
                 <div class="feature-content">
                     <h4>Custom Config</h4>
                     <p><code style="color: var(--primary); background: rgba(0,217,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">--force --skip-install</code></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Deployment -->
-    <section class="section">
-        <div class="section-header">
-            <h2><span class="gradient-text">Deploy Anywhere</span></h2>
-            <p>Production-ready commands for any platform</p>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <div class="card-icon"><i class="fas fa-desktop"></i></div>
-                <h3>Development</h3>
-                <p>Fast feedback with HMR and automatic route discovery.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
-                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">$ npm run dev
-
-Sub-50ms HMR
-API routes work
-Routes in menu</code>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-icon"><i class="fas fa-eye"></i></div>
-                <h3>Preview</h3>
-                <p>Test production build locally before deployment.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
-                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">$ npm run preview
-
-Optimized bundle
-API routes work
-Gzip enabled</code>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-icon"><i class="fas fa-hammer"></i></div>
-                <h3>Build</h3>
-                <p>Optimized production bundle with minification.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
-                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">$ npm run build
-
-Minified JS
-Code splitting
-Tree shaking</code>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-icon"><i class="fas fa-rocket"></i></div>
-                <h3>Production</h3>
-                <p>Fastify server with full features and monitoring.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
-                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">$ npm start
-
-2x faster
-API routes
-/health /metrics</code>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-icon"><i class="fas fa-cloud"></i></div>
-                <h3>Platforms</h3>
-                <p>Deploy to any platform that supports Node.js.</p>
-                <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
-                    <div><i class="fas fa-check"></i> Vercel - Zero config</div>
-                    <div><i class="fas fa-check"></i> Netlify - Serverless</div>
-                    <div><i class="fas fa-check"></i> Docker - Containerized</div>
-                    <div><i class="fas fa-check"></i> Railway, Render, AWS</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-icon"><i class="fas fa-magnifying-glass"></i></div>
-                <h3>SEO & Meta</h3>
-                <p>Define in root layout with automatic injection.</p>
-                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
-                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">export const metadata = {
-  title: 'My App',
-  description: '...',
-  openGraph: { /* ... */ },
-  twitter: { /* ... */ }
-}</code>
                 </div>
             </div>
         </div>
@@ -1475,42 +1803,100 @@ API routes
         <div class="accordion">
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
-                    <span>What's new in v9.1.5?</span>
-                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    <span>What's new in v9.2.2?</span>
+                    <span class="accordion-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
                 </div>
                 <div class="accordion-content">
                     <p><strong>Major features released:</strong></p>
                     <ul>
-                        <li>TypeScript API Routes - Full .ts support with type safety</li>
-                        <li>Unified File Structure - Next.js-compatible src/app/api</li>
-                        <li>Mixed Language Support - Use .ts and .js together</li>
-                        <li>Dynamic API Routes - Support [id] and [...slug] patterns</li>
-                        <li>Enhanced Hot Reload - Instant API updates</li>
-                        <li>Improved DX - Better type hints and error messages</li>
+                        <li>Custom 404 Pages – Create beautiful not-found.tsx/jsx pages</li>
+                        <li>Dynamic Imports – Automatic code splitting across all servers</li>
+                        <li>Universal Deployment – Works on GitHub Pages, Netlify, Vercel & more</li>
+                        <li>Improved Bundle Size – Lazy-loaded routes reduce initial load by 64%</li>
+                        <li>Production-Ready – Zero config needed for major hosting platforms</li>
+                        <li>Better HMR Output – Corrected Vite-style logging</li>
                     </ul>
                 </div>
             </div>
 
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
-                    <span>How do I create API routes?</span>
-                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    <span>Where can I deploy Bini.js applications?</span>
+                    <span class="accordion-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
                 </div>
                 <div class="accordion-content">
-                    <p>Create files in <code>src/app/api/</code>:</p>
+                    <p><strong>Bini.js works on multiple platforms:</strong></p>
                     <ul>
-                        <li><code>src/app/api/hello.ts</code> → /api/hello</li>
-                        <li><code>src/app/api/users.ts</code> → /api/users</li>
-                        <li><code>src/app/api/posts/[id].ts</code> → /api/posts/:id</li>
+                        <li><strong>✅ Node.js Servers:</strong> Heroku, Railway, Render, AWS, Google Cloud</li>
+                        <li><strong>✅ Vercel:</strong> Zero config deployment with automatic detection</li>
+                        <li><strong>✅ Netlify:</strong> Build command: <code>npm run build</code>, Publish directory: <code>.bini/dist</code></li>
+                        <li><strong>✅ GitHub Codespaces:</strong> Full development experience</li>
+                        <li><strong>⚠️ GitHub Pages:</strong> Currently not working (static server limitation)</li>
                     </ul>
-                    <p>Each handler exports a default function that receives (req, res) and returns JSON.</p>
+                    <p><strong>Note:</strong> Bini.js applications cannot currently be published to static servers. We're working on this functionality.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>How do I create custom 404 pages?</span>
+                    <span class="accordion-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="accordion-content">
+                    <p>Create <code>src/app/not-found.tsx</code> or <code>src/app/not-found.jsx</code>:</p>
+                    <code style="display: block; background: rgba(10,14,39,0.9); padding: 1rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;">// src/app/not-found.tsx
+export default function NotFound() {
+  return (
+    &lt;div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}&gt;
+      &lt;h1&gt;404 - Page Not Found&lt;/h1&gt;
+    &lt;/div&gt;
+  )
+}</code>
+                    <p>Bini.js automatically detects this file and uses it for all 404 responses.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>How does dynamic code splitting work?</span>
+                    <span class="accordion-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Automatic code splitting benefits:</strong></p>
+                    <ul>
+                        <li>64% smaller initial bundles (245KB → 89KB)</li>
+                        <li>65% faster first page load (2.3s → 0.8s)</li>
+                        <li>86% faster blog page load (2.1s → 0.3s)</li>
+                        <li>68% faster dashboard load (2.8s → 0.9s)</li>
+                    </ul>
+                    <p>Routes are automatically loaded on-demand using React.lazy() and dynamic imports.</p>
                 </div>
             </div>
 
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
                     <span>Is Bini.js production-ready?</span>
-                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    <span class="accordion-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
                 </div>
                 <div class="accordion-content">
                     <p><strong>Absolutely!</strong> Bini.js includes everything for production:</p>
@@ -1528,44 +1914,12 @@ API routes
 
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
-                    <span>How fast are the builds?</span>
-                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
-                </div>
-                <div class="accordion-content">
-                    <p><strong>Extremely fast!</strong> Here's why:</p>
-                    <ul>
-                        <li>Vite: Sub-50ms HMR in development</li>
-                        <li>Fastify: 2x faster than Express (1000+ req/s)</li>
-                        <li>Builds: Under 1 second for most apps</li>
-                        <li>Tree shaking: Unused code removed</li>
-                        <li>Code splitting: Vendor code separated</li>
-                        <li>Gzip/Brotli: 70%+ compression</li>
-                        <li>HTTP/2: Full protocol support</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="accordion-item" onclick="toggleAccordion(this)">
-                <div class="accordion-header">
-                    <span>Can I use both TypeScript and JavaScript?</span>
-                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
-                </div>
-                <div class="accordion-content">
-                    <p><strong>Yes!</strong> Mixed language support allows you to:</p>
-                    <ul>
-                        <li>Use .ts for type-safe routes</li>
-                        <li>Use .js for simple endpoints</li>
-                        <li>Mix in the same project</li>
-                        <li>Gradually migrate to TypeScript</li>
-                        <li>Import between .ts and .js files</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="accordion-item" onclick="toggleAccordion(this)">
-                <div class="accordion-header">
                     <span>What security features are included?</span>
-                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    <span class="accordion-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
                 </div>
                 <div class="accordion-content">
                     <p><strong>Production-grade security built-in:</strong></p>
@@ -1580,24 +1934,6 @@ API routes
                     </ul>
                 </div>
             </div>
-
-            <div class="accordion-item" onclick="toggleAccordion(this)">
-                <div class="accordion-header">
-                    <span>Where can I deploy?</span>
-                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
-                </div>
-                <div class="accordion-content">
-                    <p><strong>Deploy anywhere with Node.js support:</strong></p>
-                    <ul>
-                        <li>Vercel - Zero config deployment</li>
-                        <li>Netlify - Serverless functions</li>
-                        <li>Docker - Containerized apps</li>
-                        <li>Railway - GitHub integration</li>
-                        <li>Render - Native Node.js</li>
-                        <li>AWS, Google Cloud - Full support</li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1605,26 +1941,54 @@ API routes
     <section style="text-align: center; background: rgba(26, 31, 58, 0.7); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 20px; padding: 3rem 2rem; margin: 5rem auto; max-width: 900px; backdrop-filter: blur(10px); position: relative; overflow: hidden;">
         <h3 style="font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 900; margin-bottom: 1rem; position: relative; z-index: 2;">Ready to Build Something Amazing?</h3>
         <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; position: relative; z-index: 2;">Join thousands of developers building faster, more secure React applications with Bini.js. Get started in seconds.</p>
-        <button class="btn-primary" style="font-size: 1.05rem; padding: 1.1rem 3rem; margin-top: 1rem;"><i class="fas fa-rocket"></i> Start Building Now</button>
+        <button class="btn-primary" style="font-size: 1.05rem; padding: 1.1rem 3rem; margin-top: 1rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+            Start Building Now
+        </button>
     </section>
 
     <!-- Footer -->
     <footer>
         <p>© 2024 Bini.js. All rights reserved.</p>
-        <p>Built with <i class="fas fa-heart" style="color: var(--primary);"></i> using Vite, React, TypeScript, and Fastify</p>
+        <p>Built with ❤️ using Vite, React, TypeScript, and Fastify</p>
         <div class="footer-text">
-            <span><i class="fas fa-plug"></i> TypeScript API Routes</span>
+            <span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: inline; margin-right: 4px;">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                Custom 404 Pages
+            </span>
             <span>•</span>
-            <span><i class="fas fa-lock"></i> Source Protection</span>
+            <span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: inline; margin-right: 4px;">
+                    <path d="M16 18l6-6-6-6"/>
+                    <path d="M8 6l-6 6 6 6"/>
+                </svg>
+                Dynamic Imports
+            </span>
             <span>•</span>
-            <span><i class="fas fa-fire"></i> 2x Faster Fastify</span>
+            <span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: inline; margin-right: 4px;">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="2" y1="12" x2="22" y2="12"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+                Universal Deployment
+            </span>
         </div>
     </footer>
 
     <!-- Back to Top -->
     <div class="back-to-top" id="back-to-top">
-        <i class="fas fa-arrow-up"></i>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
     </div>
+
 <script>
     // Loading screen
     window.addEventListener('load', () => {
@@ -1684,7 +2048,7 @@ API routes
         }
     });
 
-    // Accordion functionality - ADD THIS FUNCTION
+    // Accordion functionality
     function toggleAccordion(element) {
         // Close all other accordion items
         document.querySelectorAll('.accordion-item').forEach(item => {
@@ -1724,8 +2088,3 @@ API routes
 </script>
 </body>
 </html>
-
-
-
-
-
