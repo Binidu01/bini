@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bini.js v9.2.2 — Production-Ready React Framework with Dynamic Code Splitting & Custom 404 Pages</title>
+<title>Bini.js v9.2.3 — Production-Ready React Framework with File-Based Routing & Universal Deployment</title>
 
 <!-- SEO & Brand Keywords -->
-<meta name="description" content="Bini.js v9.2.2: Enterprise React framework with custom 404 pages, dynamic code splitting, universal deployment, and TypeScript API routes. 64% smaller bundles, 65% faster load times." />
-<meta name="keywords" content="Bini.js, React framework, TypeScript, API routes, Fastify, custom 404 pages, dynamic imports, code splitting, universal deployment, Vercel, Netlify" />
+<meta name="description" content="Bini.js v9.2.3: Enterprise React framework with file-based routing, universal deployment, TypeScript API routes, and standard dist output. Works on all Node.js servers." />
+<meta name="keywords" content="Bini.js, React framework, TypeScript, API routes, Fastify, file-based routing, universal deployment, Vercel, Netlify, Heroku, Railway" />
 <meta name="author" content="Bini.js" />
 <meta name="site_name" content="Bini.js" />
 <meta name="application-name" content="Bini.js" />
@@ -16,8 +16,8 @@
 
 <!-- Open Graph -->
 <meta property="og:site_name" content="Bini.js" />
-<meta property="og:title" content="Bini.js v9.2.2 — Production-Ready React Framework with Dynamic Code Splitting & Custom 404 Pages" />
-<meta property="og:description" content="Enterprise React framework with custom 404 pages, dynamic code splitting, universal deployment, and TypeScript API routes. 64% smaller bundles, 65% faster load times." />
+<meta property="og:title" content="Bini.js v9.2.3 — Production-Ready React Framework with File-Based Routing & Universal Deployment" />
+<meta property="og:description" content="Enterprise React framework with file-based routing, universal deployment, TypeScript API routes, and standard dist output. Works on all Node.js servers." />
 <meta property="og:url" content="https://bini.js.org/" />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Binidu01/bini/public/og-image.png?v=20251113v2" />
@@ -28,8 +28,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Bini.js v9.2.2 — Production-Ready React Framework with Dynamic Code Splitting" />
-<meta name="twitter:description" content="Enterprise React framework with custom 404 pages, dynamic code splitting, universal deployment, and TypeScript API routes." />
+<meta name="twitter:title" content="Bini.js v9.2.3 — Production-Ready React Framework with File-Based Routing" />
+<meta name="twitter:description" content="Enterprise React framework with file-based routing, universal deployment, TypeScript API routes, and standard dist output." />
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Binidu01/bini/public/og-image.png?v=20251113v2" />
 <meta name="twitter:image:alt" content="Bini.js Framework" />
 
@@ -39,8 +39,8 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Bini.js",
-  "version": "9.2.2",
-  "description": "Enterprise-grade React framework with TypeScript API routes, custom 404 pages, dynamic code splitting and zero-config setup",
+  "version": "9.2.3",
+  "description": "Enterprise-grade React framework with TypeScript API routes, file-based routing, universal deployment and zero-config setup",
   "url": "https://bini.js.org",
   "applicationCategory": "DeveloperApplication",
   "offers": {
@@ -67,6 +67,9 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- FontAwesome -->
+<script src="https://kit.fontawesome.com/27db9a9cd8.js" crossorigin="anonymous"></script>
 
 <style>
 * {
@@ -559,6 +562,10 @@ header.scrolled {
     height: 48px;
     margin-bottom: 1rem;
     color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
 }
 
 .card h3 {
@@ -709,11 +716,7 @@ footer p {
     justify-content: center;
     flex-shrink: 0;
     color: var(--dark-bg);
-}
-
-.feature-icon svg {
-    width: 28px;
-    height: 28px;
+    font-size: 1.5rem;
 }
 
 .feature-content h4 {
@@ -889,10 +892,9 @@ footer p {
     gap: 0.5rem;
 }
 
-.deployment-card h4 svg {
-    width: 24px;
-    height: 24px;
+.deployment-card h4 i {
     color: var(--primary);
+    font-size: 1.5rem;
 }
 
 .deployment-card code {
@@ -937,11 +939,7 @@ footer p {
     .feature-icon {
         width: 50px;
         height: 50px;
-    }
-
-    .feature-icon svg {
-        width: 24px;
-        height: 24px;
+        font-size: 1.2rem;
     }
 
     .feature-content h4 {
@@ -1038,6 +1036,7 @@ footer p {
     .card-icon {
         width: 40px;
         height: 40px;
+        font-size: 1.2rem;
     }
 
     .card-badge {
@@ -1058,11 +1057,7 @@ footer p {
     .feature-icon {
         width: 45px;
         height: 45px;
-    }
-
-    .feature-icon svg {
-        width: 20px;
-        height: 20px;
+        font-size: 1.1rem;
     }
 
     .accordion-item {
@@ -1103,26 +1098,23 @@ footer p {
             <div class="logo">
                 <div class="logo-icon">ß</div>
                 <span>Bini.js</span>
-                <span class="version-badge">v9.2.2</span>
+                <span class="version-badge">v9.2.3</span>
             </div>
             <nav class="nav-menu">
                 <div class="nav-links" id="nav-links">
                     <a href="#features">Features</a>
                     <a href="#structure">Structure</a>
+                    <a href="#routing">Routing</a>
                     <a href="#api">API Routes</a>
                     <a href="#deployment">Deployment</a>
                     <a href="#faq">FAQ</a>
                 </div>
                 <button class="btn-nav" onclick="window.open('https://www.npmjs.com/package/create-bini-app')">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
-                        <path d="M5 12h14m-7-7l7 7-7 7"/>
-                    </svg>
+                    <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>
                     Get Started
                 </button>
                 <button class="mobile-menu-btn" id="mobile-menu-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M3 12h18M3 6h18M3 18h18"/>
-                    </svg>
+                    <i class="fas fa-bars"></i>
                 </button>
             </nav>
         </div>
@@ -1131,37 +1123,24 @@ footer p {
     <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <h1><span style="color: var(--text-primary);">Bini.js v9.2.2</span> — <span class="gradient-text">Production-Ready</span> React Framework</h1>
-            <p class="hero-subtitle">Custom 404 pages, dynamic code splitting, universal deployment, and TypeScript API routes. 64% smaller bundles, 65% faster load times.</p>
+            <h1><span style="color: var(--text-primary);">Bini.js v9.2.3</span> — <span class="gradient-text">Production-Ready</span> React Framework</h1>
+            <p class="hero-subtitle">Build lightning-fast, source-protected React apps with file-based routing, built-in API routes, and zero-config deployment to any Node.js server.</p>
             
             <div class="hero-cta">
                 <button class="btn-primary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10 9 9 9 8 9"/>
-                    </svg>
+                    <i class="fas fa-rocket" style="margin-right: 8px;"></i>
                     Start Building
                 </button>
                 <button class="btn-secondary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
-                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                    </svg>
+                    <i class="fas fa-book" style="margin-right: 8px;"></i>
                     View Docs
                 </button>
             </div>
 
             <div class="stats-container">
                 <div class="stat">
-                    <div class="stat-value">64%</div>
-                    <div class="stat-label">Smaller Bundles</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">65%</div>
-                    <div class="stat-label">Faster Load</div>
+                    <div class="stat-value">89KB</div>
+                    <div class="stat-label">Bundle Size</div>
                 </div>
                 <div class="stat">
                     <div class="stat-value">100%</div>
@@ -1171,6 +1150,10 @@ footer p {
                     <div class="stat-value">0</div>
                     <div class="stat-label">Config</div>
                 </div>
+                <div class="stat">
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label">Platforms</div>
+                </div>
             </div>
         </div>
     </section>
@@ -1178,7 +1161,7 @@ footer p {
     <!-- What's New -->
     <section class="section" id="features">
         <div class="section-header">
-            <h2><span class="gradient-text">What's New in v9.2.2</span></h2>
+            <h2><span class="gradient-text">What's New in v9.2.3</span></h2>
             <p>Revolutionary features that redefine React development</p>
         </div>
 
@@ -1186,95 +1169,75 @@ footer p {
             <div class="card">
                 <span class="card-badge">NEW</span>
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                        <line x1="12" y1="9" x2="12" y2="13"/>
-                        <line x1="12" y1="17" x2="12.01" y2="17"/>
-                    </svg>
+                    <i class="fas fa-folder"></i>
                 </div>
-                <h3>Custom 404 Pages</h3>
-                <p>Create beautiful not-found.tsx/jsx pages that display when routes don't exist. Works in dev, preview, and production.</p>
+                <h3>Standard Build Output</h3>
+                <p>Industry-standard dist/ folder instead of .bini/dist. Works with all CI/CD pipelines and major hosting platforms.</p>
             </div>
 
             <div class="card">
                 <span class="card-badge">NEW</span>
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M16 18l6-6-6-6"/>
-                        <path d="M8 6l-6 6 6 6"/>
-                    </svg>
+                    <i class="fas fa-route"></i>
                 </div>
-                <h3>Dynamic Code Splitting</h3>
-                <p>Automatic code splitting across all servers. Lazy-loaded routes reduce initial load by 64%.</p>
+                <h3>Advanced File-Based Routing</h3>
+                <p>File-based routes take precedence over folder-based. Support for admin.tsx → /admin and admin/page.tsx → /admin patterns.</p>
             </div>
 
             <div class="card">
                 <span class="card-badge">NEW</span>
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="2" y1="12" x2="22" y2="12"/>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                    </svg>
+                    <i class="fas fa-globe"></i>
                 </div>
                 <h3>Universal Deployment</h3>
-                <p>Works on GitHub Pages, Netlify, Vercel & more. All platforms automatically benefit from dynamic code splitting.</p>
+                <p>Works on all Node.js servers - Vercel, Netlify, Heroku, Railway, Render, and traditional VPS. Zero config required.</p>
             </div>
 
             <div class="card">
                 <span class="card-badge">IMPROVED</span>
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <polyline points="13 3 13 10 19 10"/>
-                        <path d="M22 16.92V19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2.08"/>
-                        <path d="M18 12A6 6 0 0 0 6 12v4h12z"/>
-                    </svg>
+                    <i class="fas fa-bolt"></i>
                 </div>
-                <h3>Improved Bundle Size</h3>
-                <p>Lazy-loaded routes reduce initial load. 64% smaller initial bundles with automatic optimization.</p>
+                <h3>Fastify Production Server</h3>
+                <p>2x faster than Express with built-in security, rate limiting, and auto-opening browser for dev, preview, and start commands.</p>
             </div>
 
             <div class="card">
                 <span class="card-badge">IMPROVED</span>
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                    </svg>
+                    <i class="fas fa-code"></i>
                 </div>
-                <h3>Production-Ready</h3>
-                <p>Zero config needed for major hosting platforms. Works seamlessly on all major platforms.</p>
+                <h3>Priority Routing System</h3>
+                <p>File-based routes win when both file-based and folder-based routes exist. Complete flexibility for your routing needs.</p>
             </div>
 
             <div class="card">
                 <span class="card-badge">CORE</span>
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
-                        <path d="M12 8l4 4-4 4-4-4z"/>
-                    </svg>
+                    <i class="fas fa-cogs"></i>
                 </div>
                 <h3>Zero Configuration</h3>
-                <p>Sensible defaults for TypeScript, Tailwind CSS, and modern tooling. Works out of the box.</p>
+                <p>Sensible defaults for TypeScript, routing, and modern tooling. Works out of the box with all major platforms.</p>
             </div>
         </div>
 
         <!-- Performance Metrics -->
         <div class="performance-metrics">
             <div class="metric-card">
-                <div class="metric-value">245KB → 89KB</div>
-                <div class="metric-label">Initial Bundle Size</div>
+                <div class="metric-value">89KB</div>
+                <div class="metric-label">Bundle Size (gzipped)</div>
             </div>
             <div class="metric-card">
-                <div class="metric-value">2.3s → 0.8s</div>
-                <div class="metric-label">First Page Load</div>
+                <div class="metric-value">2x</div>
+                <div class="metric-label">Faster than Express</div>
             </div>
             <div class="metric-card">
-                <div class="metric-value">2.1s → 0.3s</div>
-                <div class="metric-label">Blog Page Load</div>
+                <div class="metric-value">&lt;10s</div>
+                <div class="metric-label">Build Time</div>
             </div>
             <div class="metric-card">
-                <div class="metric-value">2.8s → 0.9s</div>
-                <div class="metric-label">Dashboard Load</div>
+                <div class="metric-value">&lt;100ms</div>
+                <div class="metric-label">HMR Updates</div>
             </div>
         </div>
     </section>
@@ -1282,87 +1245,167 @@ footer p {
     <!-- File Structure -->
     <section class="section" id="structure">
         <div class="section-header">
-            <h2><span class="gradient-text">Unified File Structure</span></h2>
-            <p>Next.js-compatible organization for modern development</p>
+            <h2><span class="gradient-text">Standard Project Structure</span></h2>
+            <p>Next.js-compatible organization with industry-standard output</p>
         </div>
 
         <div style="background: rgba(26, 31, 58, 0.7); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 16px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0; backdrop-filter: blur(10px);">
             <div style="font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; color: var(--primary); letter-spacing: 0.5px;">
                 <div><span style="color: #a78bfa;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: inline; margin-right: 8px;">
-                        <path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-6"/>
-                        <polyline points="10 2 10 4 20 4 20 14 22 14 22 2"/>
-                    </svg>
-                    src/app/
+                    <i class="fas fa-folder" style="margin-right: 8px;"></i>
+                    my-app/
                 </span></div>
-                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">layout.tsx</span> <span style="color: #7a8896;"># Root layout</span></div>
-                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># Home page (/)</span></div>
-                <div style="margin-left: 1.5rem; background: rgba(0, 217, 255, 0.1); padding: 0.8rem; border-left: 3px solid var(--primary); margin-top: 0.5rem; border-radius: 4px;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">not-found.tsx</span> <span style="color: #00d084;">★ NEW Custom 404</span></div>
-                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">about/</span></div>
-                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># /about</span></div>
-                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">blog/</span></div>
-                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">[slug]/</span></div>
-                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># /blog/:slug</span></div>
-                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">api/</span></div>
-                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">hello.ts</span> <span style="color: #7a8896;"># TypeScript API</span></div>
-                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">users.ts</span> <span style="color: #7a8896;"># TypeScript API</span></div>
-                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">products/</span></div>
-                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">[id].ts</span> <span style="color: #7a8896;"># Dynamic route</span></div>
-                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">search/</span></div>
-                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">query.js</span> <span style="color: #7a8896;"># JavaScript API</span></div>
-                <div style="margin-left: 1.5rem; margin-top: 0.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">globals.css</span> <span style="color: #7a8896;"># Global styles</span></div>
+                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">src/</span></div>
+                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">app/</span> <span style="color: #7a8896;"># App Router (Next.js style)</span></div>
+                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">layout.tsx</span> <span style="color: #7a8896;"># Root layout</span></div>
+                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># / (home)</span></div>
+                <div style="margin-left: 4.5rem; background: rgba(0, 217, 255, 0.1); padding: 0.8rem; border-left: 3px solid var(--primary); margin-top: 0.5rem; border-radius: 4px;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">admin.tsx</span> <span style="color: #00d084;">★ File-based route</span></div>
+                <div style="margin-left: 4.5rem; background: rgba(0, 217, 255, 0.1); padding: 0.8rem; border-left: 3px solid var(--primary); margin-top: 0.5rem; border-radius: 4px;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">dashboard.tsx</span> <span style="color: #00d084;">★ File-based route</span></div>
+                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">products/</span></div>
+                <div style="margin-left: 6rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># /products</span></div>
+                <div style="margin-left: 6rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">[id]/</span></div>
+                <div style="margin-left: 7.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">page.tsx</span> <span style="color: #7a8896;"># /products/:id</span></div>
+                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">api/</span></div>
+                <div style="margin-left: 6rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">hello.ts</span> <span style="color: #00d084;">★ POST /api/hello</span></div>
+                <div style="margin-left: 6rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">users/[id].ts</span> <span style="color: #00d084;">★ GET /api/users/:id</span></div>
+                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">not-found.tsx</span> <span style="color: #7a8896;"># 404 page</span></div>
+                <div style="margin-left: 4.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">globals.css</span></div>
+                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">components/</span></div>
+                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">App.tsx</span> <span style="color: #7a8896;"># Auto-generated</span></div>
+                <div style="margin-left: 3rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">main.tsx</span></div>
+                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">public/</span> <span style="color: #7a8896;"># Static files</span></div>
+                <div style="margin-left: 1.5rem; background: rgba(124, 58, 237, 0.1); padding: 0.8rem; border-left: 3px solid var(--accent); margin-top: 0.5rem; border-radius: 4px;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">dist/</span> <span style="color: #00d084;">⭐ NEW! Standard build output</span></div>
+                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">bini/</span> <span style="color: #7a8896;"># Framework internals</span></div>
+                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">├──</span> <span style="color: var(--primary);">api-server.js</span> <span style="color: #7a8896;"># Fastify production server</span></div>
+                <div style="margin-left: 1.5rem;"><span style="color: #b0b8c1;">└──</span> <span style="color: var(--primary);">package.json</span></div>
             </div>
         </div>
 
         <div class="features-grid" style="margin-top: 3rem;">
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <polyline points="9 11 12 14 22 4"/>
-                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-                    </svg>
+                    <i class="fas fa-magic"></i>
                 </div>
                 <div class="feature-content">
                     <h4>Auto-Discovered Routes</h4>
-                    <p>All routes automatically discovered and compiled at startup</p>
+                    <p>All routes automatically discovered and compiled at startup with priority system</p>
                 </div>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                    </svg>
+                    <i class="fas fa-sync-alt"></i>
                 </div>
                 <div class="feature-content">
                     <h4>Hot Reload</h4>
-                    <p>Instant updates in development with sub-50ms HMR</p>
+                    <p>Instant updates in development with sub-100ms HMR and auto-opening browser</p>
                 </div>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M16 18l6-6-6-6"/>
-                        <path d="M8 6l-6 6 6 6"/>
-                    </svg>
+                    <i class="fas fa-code-branch"></i>
                 </div>
                 <div class="feature-content">
-                    <h4>Dynamic Imports</h4>
-                    <p>Automatic code splitting for all routes</p>
+                    <h4>Flexible Routing</h4>
+                    <p>Choose between file-based or folder-based routing per route with automatic precedence</p>
                 </div>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <polyline points="14 2 14 8 20 8"/>
-                        <path d="M16 13H8"/>
-                        <path d="M16 17H8"/>
-                        <path d="M10 9H8"/>
-                        <path d="M20 4v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l4 4z"/>
-                    </svg>
+                    <i class="fas fa-shield-alt"></i>
                 </div>
                 <div class="feature-content">
-                    <h4>Full TypeScript</h4>
-                    <p>Complete TypeScript support with zero configuration</p>
+                    <h4>Production Ready</h4>
+                    <p>Fastify server with security, rate limiting, and graceful shutdown included</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Routing -->
+    <section class="section" id="routing">
+        <div class="section-header">
+            <h2><span class="gradient-text">Advanced File-Based Routing</span></h2>
+            <p>Two routing patterns with intelligent priority system</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-file"></i>
+                </div>
+                <h3>File-Based Routing</h3>
+                <p>Simple single-file routes for quick development and less boilerplate.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">src/app/
+├── admin.tsx          # /admin
+├── settings.tsx       # /settings
+└── profile.tsx        # /profile</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <h3>Folder-Based Routing</h3>
+                <p>Traditional Next.js structure for complex layouts and better organization.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">src/app/
+├── admin/page.tsx     # /admin
+├── settings/page.tsx  # /settings
+└── profile/page.tsx   # /profile</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3>Priority System</h3>
+                <p>When both exist, file-based wins. Complete flexibility for your routing needs.</p>
+                <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">src/app/
+├── admin.tsx          ✅ WINS → /admin
+├── admin/page.tsx     ❌ IGNORED</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-grid" style="margin-top: 2rem;">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brackets-curly"></i>
+                </div>
+                <div class="feature-content">
+                    <h4>Dynamic Routes</h4>
+                    <p>Support for [id], [...slug] patterns with full type safety and parameter validation</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="feature-content">
+                    <h4>Custom 404 Pages</h4>
+                    <p>Create beautiful not-found.tsx pages that work in dev, preview, and production</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <div class="feature-content">
+                    <h4>Layout Support</h4>
+                    <p>Nested layouts with proper hierarchy and persistent state across navigation</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="feature-content">
+                    <h4>Automatic Optimization</h4>
+                    <p>Lazy-loaded routes with 64% smaller initial bundles and automatic code splitting</p>
                 </div>
             </div>
         </div>
@@ -1378,68 +1421,60 @@ footer p {
         <div class="grid">
             <div class="card">
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 19l7-7 3 3-7 7-3-3z"/>
-                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
-                        <path d="M2 2l7.586 7.586"/>
-                        <circle cx="11" cy="11" r="2"/>
-                    </svg>
+                    <i class="fas fa-code"></i>
                 </div>
                 <h3>Basic TypeScript API</h3>
                 <p>Simple endpoints with automatic JSON serialization and type safety.</p>
                 <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
-                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">// src/app/api/users.ts
-import type { Request, Response } from 'fastify'
-
-export default function handler(
-  req: Request,
-  res: Response
-) {
-  return { users: [] }
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">// src/app/api/hello.ts
+export default function handler(req: any, res: any) {
+  return {
+    message: 'Hello from Bini.js!',
+    method: req.method,
+    timestamp: new Date().toISOString()
+  };
 }</code>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="7" cy="7" r="2"/>
-                        <circle cx="17" cy="17" r="2"/>
-                        <path d="M7 17l5-5 5 5"/>
-                        <path d="M17 7l-5 5-5-5"/>
-                    </svg>
+                    <i class="fas fa-route"></i>
                 </div>
                 <h3>Dynamic Routes</h3>
                 <p>URL parameters with full type safety. Supports [id] and [...slug].</p>
                 <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
-                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">// src/app/api/products/[id].ts
-export default function handler(req, res) {
-  const { id } = req.query
-  return { 
-    product: { id, name: `Product ${id}` }
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">// src/app/api/users/[id].ts
+export default function handler(req: any, res: any) {
+  const { id } = req.params;
+
+  if (req.method === 'GET') {
+    return { id, name: `User ${id}` };
   }
+
+  res.status(405);
+  return { error: 'Method not allowed' };
 }</code>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="12" y1="8" x2="12" y2="16"/>
-                        <line x1="8" y1="12" x2="16" y2="12"/>
-                    </svg>
+                    <i class="fas fa-exchange-alt"></i>
                 </div>
                 <h3>Request Methods</h3>
                 <p>Full REST support with GET, POST, PUT, DELETE, PATCH.</p>
                 <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
-                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">export default function handler(req, res) {
+                    <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">// src/app/api/users.ts
+export default function handler(req, res) {
   switch (req.method) {
-    case 'GET': return { data: [] }
+    case 'GET': return { users: [] }
     case 'POST': 
       res.status(201)
       return { created: true }
-    default: res.status(405)
+    default: 
+      res.status(405)
+      return { error: 'Method not allowed' }
   }
 }</code>
                 </div>
@@ -1447,12 +1482,10 @@ export default function handler(req, res) {
 
             <div class="card">
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
+                    <i class="fas fa-shield-alt"></i>
                 </div>
-                <h3>Rate Limiting</h3>
-                <p>Built-in protection with automatic headers.</p>
+                <h3>Built-in Security</h3>
+                <p>Helmet.js security headers, rate limiting, CORS protection, and XSS prevention.</p>
                 <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; position: relative;">
                     <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">X-RateLimit-Limit: 100
 X-RateLimit-Remaining: 87
@@ -1464,11 +1497,7 @@ X-RateLimit-Reset: 1730396400
 
             <div class="card">
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <circle cx="12" cy="5" r="2"/>
-                        <path d="M12 7v4"/>
-                    </svg>
+                    <i class="fas fa-broom"></i>
                 </div>
                 <h3>Auto Sanitization</h3>
                 <p>Input validation and path traversal prevention built-in.</p>
@@ -1484,19 +1513,17 @@ export default function handler(req, res) {
 
             <div class="card">
                 <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                    </svg>
+                    <i class="fas fa-rocket"></i>
                 </div>
                 <h3>Production Features</h3>
-                <p>Everything needed for enterprise APIs.</p>
+                <p>Everything needed for enterprise APIs with Fastify performance.</p>
                 <div style="margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
-                    <div>⏱️ 30s timeout</div>
-                    <div>📦 1MB body limit</div>
-                    <div>✅ Auto JSON</div>
-                    <div>💾 5min cache</div>
-                    <div>🔒 Sanitized</div>
-                    <div>🚀 Production</div>
+                    <div><i class="fas fa-clock"></i> 30s timeout</div>
+                    <div><i class="fas fa-database"></i> 1MB body limit</div>
+                    <div><i class="fas fa-check"></i> Auto JSON</div>
+                    <div><i class="fas fa-bolt"></i> 2x faster</div>
+                    <div><i class="fas fa-shield-alt"></i> Sanitized</div>
+                    <div><i class="fas fa-server"></i> Production</div>
                 </div>
             </div>
         </div>
@@ -1506,111 +1533,124 @@ export default function handler(req, res) {
     <section class="section" id="deployment">
         <div class="section-header">
             <h2><span class="gradient-text">Universal Deployment</span></h2>
-            <p>Deploy your Bini.js apps anywhere with ease</p>
+            <p>Deploy your Bini.js apps anywhere with zero configuration</p>
         </div>
 
         <div class="deployment-grid">
             <div class="deployment-card">
                 <h4>
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/>
-                        <line x1="8" y1="16" x2="8.01" y2="16"/>
-                        <line x1="8" y1="20" x2="8.01" y2="20"/>
-                        <line x1="12" y1="18" x2="12.01" y2="18"/>
-                        <line x1="12" y1="22" x2="12.01" y2="22"/>
-                        <line x1="16" y1="16" x2="16.01" y2="16"/>
-                        <line x1="16" y1="20" x2="16.01" y2="20"/>
-                    </svg>
-                    Node.js Servers
+                    <i class="fas fa-server"></i>
+                    All Node.js Servers
                 </h4>
-                <p>All Node.js servers can publish Bini.js applications with full functionality:</p>
+                <p>Works on any platform with Node.js runtime support:</p>
                 <code>npm run build
 npm run start</code>
-                <p>Works on Heroku, Railway, Render, AWS, Google Cloud, and any platform with Node.js support.</p>
-            </div>
-
-            <div class="deployment-card">
-                <h4>
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M7 9l5 5 5-5"/>
-                        <path d="M7 15l5 5 5-5"/>
-                    </svg>
-                    Vercel Deployment
-                </h4>
-                <p>Deploy to Vercel with zero configuration:</p>
-                <code># 1. Push to GitHub
-git push origin main
-
-# 2. Connect repo in Vercel dashboard
-# 3. Automatic deployments on every push</code>
-                <p>Vercel automatically detects Bini.js and configures everything.</p>
-            </div>
-
-            <div class="deployment-card">
-                <h4>
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
-                    </svg>
-                    Netlify Deployment
-                </h4>
-                <p>Deploy to Netlify in minutes:</p>
-                <code># Build command:
-npm run build
-
-# Publish directory:
-.bini/dist</code>
-                <p>Connect your GitHub repo or drag & drop the .bini/dist folder.</p>
-            </div>
-
-            <div class="deployment-card">
-                <h4>
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                    </svg>
-                    GitHub Codespaces
-                </h4>
-                <p>✅ Working perfectly in GitHub Codespaces</p>
-                <code># Open in Codespaces
-# Run development server:
-npm run dev</code>
-                <p>Full development experience with hot reload and all features.</p>
-            </div>
-
-            <div class="deployment-card">
-                <h4>
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                    </svg>
-                    GitHub Pages
-                </h4>
-                <p>⚠️ Currently not working with GitHub Pages</p>
-                <code># Static deployment limitation
-# API routes require server runtime</code>
-                <div class="note warning">
-                    <strong>Note:</strong> Bini.js applications cannot currently be published to static servers like GitHub Pages. We're working on this functionality and it will be available in future updates.
+                <p>Perfect for Heroku, Railway, Render, AWS, Google Cloud, and traditional VPS.</p>
+                <div class="note">
+                    <strong>Auto-opening browser</strong> for dev, preview, and start commands.
                 </div>
             </div>
 
             <div class="deployment-card">
                 <h4>
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10 9 9 9 8 9"/>
-                    </svg>
-                    Coming Soon
+                    <i class="fab fa-vercel"></i>
+                    Vercel Deployment
                 </h4>
-                <p>We're actively working on expanding deployment options:</p>
+                <p>Zero configuration deployment with automatic detection:</p>
+                <code># Push to GitHub
+git push origin main
+
+# Vercel auto-detects and deploys</code>
+                <p>Automatic deployments on every push with proper configuration.</p>
+            </div>
+
+            <div class="deployment-card">
+                <h4>
+                    <i class="fab fa-node-js"></i>
+                    Netlify Deployment
+                </h4>
+                <p>Deploy with Node.js runtime in minutes:</p>
+                <code># Build command:
+npm run build
+
+# Publish directory:
+dist</code>
+                <div class="note">
+                    <strong>Enable Node.js runtime</strong> in Netlify settings for full functionality.
+                </div>
+            </div>
+
+            <div class="deployment-card">
+                <h4>
+                    <i class="fas fa-train"></i>
+                    Railway Deployment
+                </h4>
+                <p>Automatic deployment with zero configuration:</p>
+                <code># Connect GitHub repo
+# Railway auto-detects Node.js
+# Sets PORT automatically</code>
+                <p>Perfect for continuous deployment with automatic branch deployments.</p>
+            </div>
+
+            <div class="deployment-card">
+                <h4>
+                    <i class="fas fa-cloud"></i>
+                    Heroku Deployment
+                </h4>
+                <p>Traditional deployment made simple:</p>
+                <code>heroku create my-bini-app
+git push heroku main</code>
+                <p>Works out of the box with proper Procfile and build configuration.</p>
+            </div>
+
+            <div class="deployment-card">
+                <h4>
+                    <i class="fas fa-laptop-code"></i>
+                    Development Everywhere
+                </h4>
+                <p>Full development experience on all platforms:</p>
                 <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
-                    <li>Static site generation for GitHub Pages</li>
-                    <li>Docker containerization</li>
-                    <li>Edge runtime compatibility</li>
-                    <li>More platform-specific optimizations</li>
+                    <li>✅ GitHub Codespaces</li>
+                    <li>✅ CodeSandbox</li>
+                    <li>✅ GitPod</li>
+                    <li>✅ Local development</li>
                 </ul>
                 <div class="note">
-                    <strong>Stay tuned</strong> for updates on static server deployment capabilities.
+                    <strong>Hot reload</strong> works everywhere with consistent behavior.
+                </div>
+            </div>
+        </div>
+
+        <!-- Deployment Compatibility Table -->
+        <div style="background: rgba(26, 31, 58, 0.7); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 16px; padding: 1.5rem; margin-top: 2rem; backdrop-filter: blur(10px);">
+            <h4 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-table"></i>
+                Deployment Compatibility
+            </h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; font-size: 0.9rem;">
+                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(124, 58, 237, 0.2);">
+                    <span>Vercel</span>
+                    <span style="color: #00d084;">✅ Full</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(124, 58, 237, 0.2);">
+                    <span>Netlify</span>
+                    <span style="color: #00d084;">✅ Full</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(124, 58, 237, 0.2);">
+                    <span>Heroku</span>
+                    <span style="color: #00d084;">✅ Full</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(124, 58, 237, 0.2);">
+                    <span>Railway</span>
+                    <span style="color: #00d084;">✅ Full</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(124, 58, 237, 0.2);">
+                    <span>Render</span>
+                    <span style="color: #00d084;">✅ Full</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(124, 58, 237, 0.2);">
+                    <span>GitHub Pages</span>
+                    <span style="color: #ff6b6b;">❌ No</span>
                 </div>
             </div>
         </div>
@@ -1626,105 +1666,77 @@ npm run dev</code>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <circle cx="12" cy="5" r="2"/>
-                        <path d="M12 7v4"/>
-                    </svg>
+                    <i class="fas fa-lock"></i>
                 </div>
                 <div class="feature-content">
                     <h4>Source Code Protection</h4>
-                    <p>Advanced obfuscation and minification. Your code stays hidden from reverse engineering.</p>
+                    <p>Advanced obfuscation and minification. Your code stays protected from reverse engineering.</p>
                 </div>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                    </svg>
+                    <i class="fas fa-bolt"></i>
                 </div>
                 <div class="feature-content">
                     <h4>Lightning-Fast Builds</h4>
-                    <p>Vite-powered with sub-50ms HMR. Production builds under 1 second.</p>
+                    <p>Vite-powered with sub-100ms HMR. Production builds under 10 seconds.</p>
                 </div>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
+                    <i class="fas fa-shield-alt"></i>
                 </div>
                 <div class="feature-content">
                     <h4>Enterprise Security</h4>
-                    <p>Helmet headers, CORS, rate limiting, and graceful shutdown out of the box.</p>
+                    <p>Helmet headers, CORS, rate limiting (100 req/15 min), and graceful shutdown out of the box.</p>
                 </div>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                    </svg>
+                    <i class="fas fa-route"></i>
                 </div>
                 <div class="feature-content">
-                    <h4>File-Based Routing</h4>
-                    <p>Next.js-style organization. Create pages by adding files.</p>
+                    <h4>Flexible Routing</h4>
+                    <p>File-based and folder-based routing with intelligent priority system.</p>
                 </div>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                    </svg>
+                    <i class="fas fa-tachometer-alt"></i>
                 </div>
                 <div class="feature-content">
-                    <h4>Monitoring Ready</h4>
-                    <p>Health checks, metrics endpoints, and intelligent port management.</p>
+                    <h4>Performance Optimized</h4>
+                    <p>Fastify server (2x faster than Express) with automatic code splitting and lazy loading.</p>
                 </div>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                        <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
-                        <polyline points="7.5 19.79 7.5 14.6 3 12"/>
-                        <polyline points="21 12 16.5 14.6 16.5 19.79"/>
-                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                        <line x1="12" y1="22.08" x2="12" y2="12"/>
-                    </svg>
+                    <i class="fas fa-plug"></i>
                 </div>
                 <div class="feature-content">
-                    <h4>Full-Stack Development</h4>
-                    <p>API routes work in dev, preview, and production. No separate backend needed.</p>
+                    <h4>Universal Deployment</h4>
+                    <p>Works on all Node.js servers with zero configuration. No platform lock-in.</p>
                 </div>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                    </svg>
+                    <i class="fas fa-cogs"></i>
                 </div>
                 <div class="feature-content">
                     <h4>Zero Configuration</h4>
-                    <p>TypeScript and Tailwind CSS pre-configured. Start coding immediately.</p>
+                    <p>TypeScript and modern tooling pre-configured. Start coding immediately.</p>
                 </div>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <polyline points="14 2 14 8 20 8"/>
-                        <path d="M16 13H8"/>
-                        <path d="M16 17H8"/>
-                        <path d="M10 9H8"/>
-                        <path d="M20 4v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l4 4z"/>
-                    </svg>
+                    <i class="fas fa-code"></i>
                 </div>
                 <div class="feature-content">
                     <h4>TypeScript Native</h4>
@@ -1742,10 +1754,15 @@ npm run dev</code>
         </div>
 
         <div style="background: rgba(10, 14, 39, 0.9); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 2rem auto; max-width: 700px; position: relative;">
-            <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;">$ npx create-bini-app@latest my-app
-$ cd my-app
-$ npm install
-$ npm run dev
+            <code style="color: var(--primary); font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; display: block; white-space: pre; overflow-x: auto;"># Create new project
+npx create-bini-app@latest my-app
+
+# Install dependencies
+cd my-app
+npm install
+
+# Start development server (auto-opens browser)
+npm run dev
 
 # Your app opens at http://localhost:3000</code>
         </div>
@@ -1753,13 +1770,7 @@ $ npm run dev
         <div class="features-grid" style="max-width: 900px; margin: 3rem auto;">
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <polyline points="14 2 14 8 20 8"/>
-                        <path d="M16 13H8"/>
-                        <path d="M16 17H8"/>
-                        <path d="M10 9H8"/>
-                        <path d="M20 4v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l4 4z"/>
-                    </svg>
+                    <i class="fas fa-code"></i>
                 </div>
                 <div class="feature-content">
                     <h4>TypeScript + Tailwind</h4>
@@ -1769,25 +1780,17 @@ $ npm run dev
 
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
+                    <i class="fas fa-users"></i>
                 </div>
                 <div class="feature-content">
-                    <h4>CSS Modules</h4>
-                    <p><code style="color: var(--primary); background: rgba(0,217,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">--css-modules</code></p>
+                    <h4>Team Ready</h4>
+                    <p><code style="color: var(--primary); background: rgba(0,217,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">--git --readme</code></p>
                 </div>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                    </svg>
+                    <i class="fas fa-tools"></i>
                 </div>
                 <div class="feature-content">
                     <h4>Custom Config</h4>
@@ -1807,22 +1810,20 @@ $ npm run dev
         <div class="accordion">
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
-                    <span>What's new in v9.2.2?</span>
+                    <span>What's new in v9.2.3?</span>
                     <span class="accordion-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
+                        <i class="fas fa-chevron-down"></i>
                     </span>
                 </div>
                 <div class="accordion-content">
-                    <p><strong>Major features released:</strong></p>
+                    <p><strong>Major features released in v9.2.3:</strong></p>
                     <ul>
-                        <li>Custom 404 Pages – Create beautiful not-found.tsx/jsx pages</li>
-                        <li>Dynamic Imports – Automatic code splitting across all servers</li>
-                        <li>Universal Deployment – Works on GitHub Pages, Netlify, Vercel & more</li>
-                        <li>Improved Bundle Size – Lazy-loaded routes reduce initial load by 64%</li>
-                        <li>Production-Ready – Zero config needed for major hosting platforms</li>
-                        <li>Better HMR Output – Corrected Vite-style logging</li>
+                        <li><strong>Standard Build Output</strong> – dist/ folder instead of .bini/dist</li>
+                        <li><strong>Advanced File-Based Routing</strong> – File-based routes take precedence</li>
+                        <li><strong>Universal Deployment</strong> – Works on all Node.js servers</li>
+                        <li><strong>Fastify Production Server</strong> – 2x faster than Express</li>
+                        <li><strong>Priority Routing System</strong> – File-based wins over folder-based</li>
+                        <li><strong>Zero Config Deployment</strong> – Works on Vercel, Netlify, Heroku, Railway</li>
                     </ul>
                 </div>
             </div>
@@ -1831,65 +1832,64 @@ $ npm run dev
                 <div class="accordion-header">
                     <span>Where can I deploy Bini.js applications?</span>
                     <span class="accordion-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
+                        <i class="fas fa-chevron-down"></i>
                     </span>
                 </div>
                 <div class="accordion-content">
-                    <p><strong>Bini.js works on multiple platforms:</strong></p>
+                    <p><strong>Bini.js works on all Node.js platforms:</strong></p>
                     <ul>
-                        <li><strong>✅ Node.js Servers:</strong> Heroku, Railway, Render, AWS, Google Cloud</li>
-                        <li><strong>✅ Vercel:</strong> Zero config deployment with automatic detection</li>
-                        <li><strong>✅ Netlify:</strong> Build command: <code>npm run build</code>, Publish directory: <code>.bini/dist</code></li>
-                        <li><strong>✅ GitHub Codespaces:</strong> Full development experience</li>
-                        <li><strong>⚠️ GitHub Pages:</strong> Currently not working (static server limitation)</li>
+                        <li><strong>✅ All Node.js Servers:</strong> Vercel, Netlify, Heroku, Railway, Render, Fly.io</li>
+                        <li><strong>✅ Development Platforms:</strong> GitHub Codespaces, CodeSandbox, GitPod</li>
+                        <li><strong>✅ Traditional VPS:</strong> Ubuntu, CentOS, AWS, Google Cloud, Azure</li>
+                        <li><strong>❌ Static Hosting:</strong> GitHub Pages, Netlify Static, AWS S3 (requires Node.js runtime)</li>
                     </ul>
-                    <p><strong>Note:</strong> Bini.js applications cannot currently be published to static servers. We're working on this functionality.</p>
+                    <p><strong>Note:</strong> Bini.js requires Node.js runtime for API routes and full functionality.</p>
                 </div>
             </div>
 
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
-                    <span>How do I create custom 404 pages?</span>
+                    <span>How does the routing priority system work?</span>
                     <span class="accordion-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
+                        <i class="fas fa-chevron-down"></i>
                     </span>
                 </div>
                 <div class="accordion-content">
-                    <p>Create <code>src/app/not-found.tsx</code> or <code>src/app/not-found.jsx</code>:</p>
-                    <code style="display: block; background: rgba(10,14,39,0.9); padding: 1rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;">// src/app/not-found.tsx
-export default function NotFound() {
-  return (
-    &lt;div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}&gt;
-      &lt;h1&gt;404 - Page Not Found&lt;/h1&gt;
-    &lt;/div&gt;
-  )
-}</code>
-                    <p>Bini.js automatically detects this file and uses it for all 404 responses.</p>
+                    <p>Bini.js supports two routing patterns with intelligent precedence:</p>
+                    <code style="display: block; background: rgba(10,14,39,0.9); padding: 1rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;">src/app/
+├── admin.tsx          ✅ WINS → /admin
+├── admin/page.tsx     ❌ IGNORED
+├── settings/page.tsx  ✅ USED → /settings
+└── dashboard.tsx      ✅ USED → /dashboard</code>
+                    <p>This gives you complete flexibility to choose the right pattern for each route.</p>
                 </div>
             </div>
 
             <div class="accordion-item" onclick="toggleAccordion(this)">
                 <div class="accordion-header">
-                    <span>How does dynamic code splitting work?</span>
+                    <span>What's the difference between file-based and folder-based routing?</span>
                     <span class="accordion-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
+                        <i class="fas fa-chevron-down"></i>
                     </span>
                 </div>
                 <div class="accordion-content">
-                    <p><strong>Automatic code splitting benefits:</strong></p>
+                    <p><strong>File-based routing:</strong></p>
                     <ul>
-                        <li>64% smaller initial bundles (245KB → 89KB)</li>
-                        <li>65% faster first page load (2.3s → 0.8s)</li>
-                        <li>86% faster blog page load (2.1s → 0.3s)</li>
-                        <li>68% faster dashboard load (2.8s → 0.9s)</li>
+                        <li>Simple single-file routes</li>
+                        <li>Less boilerplate</li>
+                        <li>Perfect for simple pages</li>
+                        <li>Example: <code>admin.tsx</code> → <code>/admin</code></li>
                     </ul>
-                    <p>Routes are automatically loaded on-demand using React.lazy() and dynamic imports.</p>
+                    
+                    <p><strong>Folder-based routing:</strong></p>
+                    <ul>
+                        <li>Traditional Next.js structure</li>
+                        <li>Better organization</li>
+                        <li>Perfect for complex layouts</li>
+                        <li>Example: <code>admin/page.tsx</code> → <code>/admin</code></li>
+                    </ul>
+                    
+                    <p>You can mix and match both patterns in the same project.</p>
                 </div>
             </div>
 
@@ -1897,9 +1897,7 @@ export default function NotFound() {
                 <div class="accordion-header">
                     <span>Is Bini.js production-ready?</span>
                     <span class="accordion-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
+                        <i class="fas fa-chevron-down"></i>
                     </span>
                 </div>
                 <div class="accordion-content">
@@ -1910,9 +1908,9 @@ export default function NotFound() {
                         <li>Rate limiting & security headers</li>
                         <li>Health checks & monitoring</li>
                         <li>Graceful shutdown handling</li>
-                        <li>HTTP/2 support</li>
+                        <li>Fastify performance (2x faster than Express)</li>
                     </ul>
-                    <p>Deploy to Vercel, Netlify, or any platform with zero configuration.</p>
+                    <p>Deploy to any Node.js platform with zero configuration.</p>
                 </div>
             </div>
 
@@ -1920,9 +1918,7 @@ export default function NotFound() {
                 <div class="accordion-header">
                     <span>What security features are included?</span>
                     <span class="accordion-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
+                        <i class="fas fa-chevron-down"></i>
                     </span>
                 </div>
                 <div class="accordion-content">
@@ -1932,9 +1928,9 @@ export default function NotFound() {
                         <li>Helmet Headers - CSP, HSTS, X-Frame-Options</li>
                         <li>Input Sanitization - Deep traversal checks</li>
                         <li>Path Validation - Traversal prevention</li>
-                        <li>Prototype Pollution - Dangerous properties blocked</li>
+                        <li>CORS Protection - Cross-origin security</li>
+                        <li>XSS Prevention - Automatic sanitization</li>
                         <li>Graceful Shutdown - 30s timeout</li>
-                        <li>Source Protection - Code obfuscation</li>
                     </ul>
                 </div>
             </div>
@@ -1944,11 +1940,9 @@ export default function NotFound() {
     <!-- CTA -->
     <section style="text-align: center; background: rgba(26, 31, 58, 0.7); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 20px; padding: 3rem 2rem; margin: 5rem auto; max-width: 900px; backdrop-filter: blur(10px); position: relative; overflow: hidden;">
         <h3 style="font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 900; margin-bottom: 1rem; position: relative; z-index: 2;">Ready to Build Something Amazing?</h3>
-        <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; position: relative; z-index: 2;">Join thousands of developers building faster, more secure React applications with Bini.js. Get started in seconds.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; position: relative; z-index: 2;">Join developers building faster, more secure React applications with Bini.js. Get started in seconds with zero configuration.</p>
         <button class="btn-primary" style="font-size: 1.05rem; padding: 1.1rem 3rem; margin-top: 1rem;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
+            <i class="fas fa-rocket" style="margin-right: 8px;"></i>
             Start Building Now
         </button>
     </section>
@@ -1959,28 +1953,17 @@ export default function NotFound() {
         <p>Built with ❤️ using Vite, React, TypeScript, and Fastify</p>
         <div class="footer-text">
             <span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: inline; margin-right: 4px;">
-                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                    <line x1="12" y1="9" x2="12" y2="13"/>
-                    <line x1="12" y1="17" x2="12.01" y2="17"/>
-                </svg>
-                Custom 404 Pages
+                <i class="fas fa-folder" style="margin-right: 4px;"></i>
+                Standard dist/ Output
             </span>
             <span>•</span>
             <span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: inline; margin-right: 4px;">
-                    <path d="M16 18l6-6-6-6"/>
-                    <path d="M8 6l-6 6 6 6"/>
-                </svg>
-                Dynamic Imports
+                <i class="fas fa-route" style="margin-right: 4px;"></i>
+                File-Based Routing
             </span>
             <span>•</span>
             <span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: inline; margin-right: 4px;">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="2" y1="12" x2="22" y2="12"/>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                </svg>
+                <i class="fas fa-globe" style="margin-right: 4px;"></i>
                 Universal Deployment
             </span>
         </div>
@@ -1988,9 +1971,7 @@ export default function NotFound() {
 
     <!-- Back to Top -->
     <div class="back-to-top" id="back-to-top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <polyline points="18 15 12 9 6 15"/>
-        </svg>
+        <i class="fas fa-chevron-up"></i>
     </div>
 
 <script>
@@ -2092,4 +2073,3 @@ export default function NotFound() {
 </script>
 </body>
 </html>
-
