@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-8V1sTRGR.js";import{n as t}from"./index-gtQ16OEQ.js";var n=e();function r(){return(0,n.jsx)(`div`,{className:`config`,children:(0,n.jsx)(`main`,{children:(0,n.jsx)(t,{})})})}export{r as default};
