@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://bini.js.org/favicon.svg" width="80" height="80" alt="Bini.js logo" />
+  <img src="https://bini.js.org/favicon.ico" width="80" height="80" alt="Bini.js logo" />
 
   <h1>Bini.js</h1>
 
