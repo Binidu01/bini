@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-8V1sTRGR.js";import{n as t}from"./index-CmJ5enPo.js";var n=e();function r(){return(0,n.jsx)(`div`,{className:`plugins`,children:(0,n.jsx)(`main`,{children:(0,n.jsx)(t,{})})})}export{r as default};
