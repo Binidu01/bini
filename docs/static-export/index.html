@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+// bini-export: restore path after GitHub Pages 404 redirect
+(function () {
+  var redirect = sessionStorage.getItem('__bini_spa_redirect');
+  if (redirect) {
+    sessionStorage.removeItem('__bini_spa_redirect');
+    // Restore FULL pathname — BrowserRouter needs the basename prefix present
+    history.replaceState(null, '', redirect);
+  }
+})();
+</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- bini-router injects title, meta, icons, and OG tags here at build time -->
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero-Config React Framework</title>
+    <meta name="description" content="Bini.js is a zero-config React framework with file-based routing, Hono API routes, and multi-platform deployment. Build modern web applications with zero configuration.">
+    <meta name="theme-color" content="#00CFFF">
+    <meta name="keywords" content="Bini.js, Bini, bini, bini.js, Bini framework, bini framework, Bini.js framework, bini.js framework, React framework, React SPA framework, zero-config React, file-based routing, Hono API, Vite, React, JavaScript framework, TypeScript framework, full-stack React, meta-framework, web development, modern web framework, API routes, SPA, single page application, SPA framework, single page app, edge functions, Cloudflare Workers, Vercel, Netlify, Deno, Bun, Node.js, deployment, bini-router, bini-env, bini-server, create-bini-app, islands architecture, partial hydration, progressive enhancement, Tailwind CSS, CSS Modules, TypeScript, JavaScript, web performance, developer experience, DX, build tool, frontend framework, backend framework, full-stack framework, Binidu Ranasinghe, open source framework, MIT licensed, ">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Zero-Config React Framework">
+    <meta property="og:description" content="Bini.js is a zero-config React framework with file-based routing, Hono API routes, and multi-platform deployment. Build modern web applications with zero configuration.">
+    <meta property="og:url" content="/og-image.png">
+    <meta property="og:image" content="/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Zero-Config React Framework">
+    <meta name="twitter:creator" content="@binidu01">
+    <script type="module" crossorigin src="/js/index-CQF_oXqI.js"></script>
+    <link rel="modulepreload" crossorigin href="/js/jsx-runtime-CYyajZpr.js">
+    <link rel="modulepreload" crossorigin href="/js/chunk-OE4NN4TA-ZGuMkXT6.js">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

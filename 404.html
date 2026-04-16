@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Redirecting…</title>
+<script>
+// bini-export: GitHub Pages SPA 404 handler
+// Store the FULL original pathname (including basename prefix) so that
+// BrowserRouter can strip the prefix and match the correct route after load.
+sessionStorage.setItem('__bini_spa_redirect', location.pathname + location.search + location.hash);
+location.replace('/');
+</script>
+</head>
+<body></body>
+</html>
