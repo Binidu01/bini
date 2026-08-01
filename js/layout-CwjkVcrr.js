@@ -1,0 +1,1 @@
+import{c as e,i as t,t as n}from"./index-DBGHh9uN.js";var r=e(t(),1),i=n();function a({children:e}){return(0,i.jsx)(r.Fragment,{children:e})}export{a as default};
