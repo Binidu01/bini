@@ -1,0 +1,11 @@
+# https://bini.js.org/robots.txt
+
+User-agent: *
+Allow: /
+
+# Prefer the sitemap for discovery
+Sitemap: https://bini.js.org/sitemap.xml
+
+# Optional: block noisy internal paths if any appear later
+# Disallow: /api/
+# Disallow: /_internal/
