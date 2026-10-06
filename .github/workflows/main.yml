@@ -6,8 +6,6 @@ on:
       - main
     paths:
       - "src/app/**"
-      - "sitemap.xml"
-
   workflow_dispatch:
 
 permissions:
@@ -17,33 +15,34 @@ jobs:
   sitemap:
     name: Generate Sitemap
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
       - name: Check whether sitemap needs generation
         id: check
         shell: bash
         run: |
-          # Always generate if sitemap.xml does not exist
           if [ ! -f sitemap.xml ]; then
             echo "generate=true" >> "$GITHUB_OUTPUT"
             echo "sitemap.xml does not exist. Generating it."
             exit 0
           fi
 
-          # On the first commit, there may be no HEAD^
           if ! git rev-parse HEAD^ >/dev/null 2>&1; then
             echo "generate=true" >> "$GITHUB_OUTPUT"
             echo "No previous commit. Generating sitemap."
             exit 0
           fi
 
-          CHANGED_FILES="$(git diff --name-status HEAD^ HEAD -- src/app/)"
-
+          CHANGED_FILES="$(git diff --name-status HEAD^ HEAD -- src/app/ || true)"
           echo "Changed files:"
           echo "$CHANGED_FILES"
 
@@ -67,9 +66,9 @@ jobs:
           const ROOT = path.resolve("src/app");
           const OUTPUT = path.resolve("sitemap.xml");
           const BASE_URL = "https://bini.js.org";
-
           const EXTENSIONS = new Set([".tsx", ".jsx"]);
 
+          // Next.js special files that are not routes
           const SPECIAL_FILES = new Set([
             "layout",
             "loading",
@@ -77,26 +76,47 @@ jobs:
             "not-found",
             "notfound",
             "template",
-            "default"
+            "default",
+            "route", // route handlers
           ]);
 
-          function walk(dir) {
-            const entries = fs.readdirSync(dir, {
-              withFileTypes: true
-            });
+          function isPrivateOrParallel(name) {
+            // _private folders and @parallel slots
+            return name.startsWith("_") || name.startsWith("@");
+          }
 
+          function isRouteGroup(name) {
+            // (group) — invisible in the URL
+            return name.startsWith("(") && name.endsWith(")");
+          }
+
+          function isDynamicSegment(name) {
+            // [param], [...slug], [[...slug]]
+            return (
+              (name.startsWith("[") && name.endsWith("]")) ||
+              name.startsWith("[[") ||
+              name.includes("[...")
+            );
+          }
+
+          function walk(dir) {
+            if (!fs.existsSync(dir)) return [];
+            const entries = fs.readdirSync(dir, { withFileTypes: true });
             const files = [];
 
             for (const entry of entries) {
+              if (isPrivateOrParallel(entry.name)) continue;
+
               const fullPath = path.join(dir, entry.name);
 
               if (entry.isDirectory()) {
+                // Skip dynamic segments entirely for a static sitemap
+                if (isDynamicSegment(entry.name)) continue;
                 files.push(...walk(fullPath));
               } else if (entry.isFile()) {
                 files.push(fullPath);
               }
             }
-
             return files;
           }
 
@@ -104,36 +124,31 @@ jobs:
             const relative = path.relative(ROOT, file);
             const parsed = path.parse(relative);
 
-            if (!EXTENSIONS.has(parsed.ext)) {
-              return null;
-            }
+            if (!EXTENSIONS.has(parsed.ext)) return null;
 
             const filename = parsed.name;
+            if (SPECIAL_FILES.has(filename)) return null;
 
-            if (SPECIAL_FILES.has(filename)) {
+            // Build path segments, stripping route groups
+            const dirParts = path
+              .dirname(relative)
+              .split(path.sep)
+              .filter((p) => p !== "." && !isRouteGroup(p));
+
+            let route;
+            if (filename === "page") {
+              route = dirParts.length === 0 ? "/" : "/" + dirParts.join("/");
+            } else {
+              // Non-page files are not routes in the App Router
               return null;
             }
 
-            const directory = path.dirname(relative);
-
-            let route;
-
-            if (filename === "page") {
-              route =
-                directory === "."
-                  ? "/"
-                  : `/${directory.replaceAll("\\", "/")}`;
-            } else {
-              route =
-                directory === "."
-                  ? `/${filename}`
-                  : `/${directory.replaceAll("\\", "/")}/${filename}`;
-            }
-
-            return route
-              .replace(/\\/g, "/")
-              .replace(/\/+/g, "/")
-              .replace(/\/$/, "") || "/";
+            return (
+              route
+                .replace(/\\/g, "/")
+                .replace(/\/+/g, "/")
+                .replace(/\/$/, "") || "/"
+            );
           }
 
           function escapeXml(value) {
@@ -154,7 +169,7 @@ jobs:
               walk(ROOT)
                 .map(fileToRoute)
                 .filter(Boolean)
-            )
+            ),
           ].sort((a, b) => {
             if (a === "/") return -1;
             if (b === "/") return 1;
@@ -162,12 +177,9 @@ jobs:
           });
 
           const urls = routes
-            .map(route => {
-              const url = `${BASE_URL}${route}`;
-
-              return `  <url>
-    <loc>${escapeXml(url)}</loc>
-  </url>`;
+            .map((route) => {
+              const url = `${BASE_URL}${route === "/" ? "" : route}`;
+              return `  <url>\n    <loc>${escapeXml(url)}</loc>\n  </url>`;
             })
             .join("\n");
 
@@ -176,14 +188,27 @@ jobs:
           ${urls}
           </urlset>
           `
-            .replace(/^ {10}/gm, "")
+            .split("\n")
+            .map((line) => line.replace(/^ {10}/, "")) // only if still indented from heredoc
+            .join("\n")
             .trim() + "\n";
 
-          fs.writeFileSync(OUTPUT, sitemap, "utf8");
+          // Cleaner approach: build without leading spaces in the template
+          const cleanSitemap = [
+            `<?xml version="1.0" encoding="UTF-8"?>`,
+            `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
+            ...routes.map((route) => {
+              const url = `${BASE_URL}${route === "/" ? "" : route}`;
+              return `  <url>\n    <loc>${escapeXml(url)}</loc>\n  </url>`;
+            }),
+            `</urlset>`,
+            ``,
+          ].join("\n");
+
+          fs.writeFileSync(OUTPUT, cleanSitemap, "utf8");
 
           console.log(`Generated ${OUTPUT}`);
           console.log(`Found ${routes.length} routes:`);
-
           for (const route of routes) {
             console.log(`  ${route}`);
           }
@@ -193,16 +218,15 @@ jobs:
         if: steps.check.outputs.generate == 'true'
         shell: bash
         run: |
-          if git diff --quiet -- sitemap.xml && git ls-files --error-unmatch sitemap.xml >/dev/null 2>&1; then
+          # Stage and check if anything actually changed
+          git add sitemap.xml
+
+          if git diff --cached --quiet; then
             echo "Sitemap is already up to date."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add sitemap.xml
-
           git commit -m "chore: update sitemap"
-
           git push
