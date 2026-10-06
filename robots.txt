@@ -1,0 +1,6 @@
+# https://bini.js.org/robots.txt
+
+User-agent: *
+Allow: /
+
+Sitemap: https://bini.js.org/sitemap.xml
