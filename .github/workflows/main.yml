@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "src/app/**"
+      - "dist/**"
   workflow_dispatch:
 
 permissions:
@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # full history needed for accurate lastmod
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -34,37 +34,18 @@ jobs:
           const path = require("path");
           const { execSync } = require("child_process");
 
-          const ROOT = path.resolve("src/app");
+          const ROOT = path.resolve("dist");
           const OUTPUT = path.resolve("sitemap.xml");
           const BASE_URL = "https://bini.js.org";
-          const EXTENSIONS = new Set([".tsx", ".jsx"]);
 
-          const SPECIAL_FILES = new Set([
-            "layout",
-            "loading",
-            "error",
-            "not-found",
-            "notfound",
-            "template",
-            "default",
-            "route",
+          // Folders to skip entirely
+          const SKIP_DIRS = new Set([
+            "_next",
+            "assets",
+            "static",
+            "node_modules",
+            ".git",
           ]);
-
-          function isPrivateOrParallel(name) {
-            return name.startsWith("_") || name.startsWith("@");
-          }
-
-          function isRouteGroup(name) {
-            return name.startsWith("(") && name.endsWith(")");
-          }
-
-          function isDynamicSegment(name) {
-            return (
-              (name.startsWith("[") && name.endsWith("]")) ||
-              name.startsWith("[[") ||
-              name.includes("[...")
-            );
-          }
 
           function walk(dir) {
             if (!fs.existsSync(dir)) return [];
@@ -72,44 +53,30 @@ jobs:
             const files = [];
 
             for (const entry of entries) {
-              if (isPrivateOrParallel(entry.name)) continue;
-
-              const fullPath = path.join(dir, entry.name);
-
               if (entry.isDirectory()) {
-                if (isDynamicSegment(entry.name)) continue;
-                files.push(...walk(fullPath));
-              } else if (entry.isFile()) {
-                files.push(fullPath);
+                if (SKIP_DIRS.has(entry.name) || entry.name.startsWith(".")) {
+                  continue;
+                }
+                files.push(...walk(path.join(dir, entry.name)));
+              } else if (entry.isFile() && entry.name === "index.html") {
+                files.push(path.join(dir, entry.name));
               }
             }
             return files;
           }
 
           function fileToRoute(file) {
-            const relative = path.relative(ROOT, file);
-            const parsed = path.parse(relative);
-
-            if (!EXTENSIONS.has(parsed.ext)) return null;
-
-            const filename = parsed.name;
-            if (SPECIAL_FILES.has(filename)) return null;
-
-            const dirParts = path
-              .dirname(relative)
-              .split(path.sep)
-              .filter((p) => p !== "." && !isRouteGroup(p));
-
-            if (filename !== "page") return null;
-
-            const route =
-              dirParts.length === 0 ? "/" : "/" + dirParts.join("/");
-
+            // dist/index.html          → /
+            // dist/about/index.html    → /about
+            // dist/blog/post/index.html → /blog/post
+            const relative = path.relative(ROOT, path.dirname(file));
+            if (relative === "" || relative === ".") return "/";
             return (
-              route
+              "/" +
+              relative
                 .replace(/\\/g, "/")
                 .replace(/\/+/g, "/")
-                .replace(/\/$/, "") || "/"
+                .replace(/\/$/, "")
             );
           }
 
@@ -135,30 +102,24 @@ jobs:
           }
 
           if (!fs.existsSync(ROOT)) {
-            throw new Error(`Route directory not found: ${ROOT}`);
+            throw new Error(`dist directory not found: ${ROOT}`);
           }
 
-          const pageFiles = walk(ROOT);
-          const routeEntries = [];
+          console.log(`Scanning: ${ROOT}`);
 
-          for (const file of pageFiles) {
-            const route = fileToRoute(file);
-            if (!route) continue;
-
-            const lastmod = getLastmod(file);
-            routeEntries.push({ route, lastmod, file });
-          }
-
-          // Dedupe by route (keep the most recent lastmod if duplicates)
+          const indexFiles = walk(ROOT);
           const byRoute = new Map();
-          for (const entry of routeEntries) {
-            const existing = byRoute.get(entry.route);
+
+          for (const file of indexFiles) {
+            const route = fileToRoute(file);
+            const lastmod = getLastmod(file);
+
+            const existing = byRoute.get(route);
             if (
               !existing ||
-              (entry.lastmod &&
-                (!existing.lastmod || entry.lastmod > existing.lastmod))
+              (lastmod && (!existing.lastmod || lastmod > existing.lastmod))
             ) {
-              byRoute.set(entry.route, entry);
+              byRoute.set(route, { route, lastmod, file });
             }
           }
 
@@ -168,7 +129,7 @@ jobs:
             return a.route.localeCompare(b.route);
           });
 
-          const cleanSitemap = [
+          const sitemap = [
             `<?xml version="1.0" encoding="UTF-8"?>`,
             `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
             ...routes.map(({ route, lastmod }) => {
@@ -187,7 +148,7 @@ jobs:
             ``,
           ].join("\n");
 
-          fs.writeFileSync(OUTPUT, cleanSitemap, "utf8");
+          fs.writeFileSync(OUTPUT, sitemap, "utf8");
 
           console.log(`Generated ${OUTPUT}`);
           console.log(`Found ${routes.length} routes:`);
