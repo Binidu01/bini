@@ -5,7 +5,10 @@ on:
     branches:
       - main
     paths:
-      - "dist/**"
+      - "**.html"
+      - "docs/**"
+      - "showcase/**"
+      - "plugins/**"
   workflow_dispatch:
 
 permissions:
@@ -34,41 +37,45 @@ jobs:
           const path = require("path");
           const { execSync } = require("child_process");
 
-          const ROOT = path.resolve("dist");
+          const ROOT = path.resolve(".");
           const OUTPUT = path.resolve("sitemap.xml");
           const BASE_URL = "https://bini.js.org";
 
-          // Folders to skip entirely
+          // Skip non-page directories
           const SKIP_DIRS = new Set([
-            "_next",
-            "assets",
-            "static",
-            "node_modules",
             ".git",
+            ".github",
+            "node_modules",
+            "assets",
+            "css",
+            "js",
+            "_next",
+            "static",
           ]);
 
           function walk(dir) {
-            if (!fs.existsSync(dir)) return [];
             const entries = fs.readdirSync(dir, { withFileTypes: true });
             const files = [];
 
             for (const entry of entries) {
+              const fullPath = path.join(dir, entry.name);
+
               if (entry.isDirectory()) {
                 if (SKIP_DIRS.has(entry.name) || entry.name.startsWith(".")) {
                   continue;
                 }
-                files.push(...walk(path.join(dir, entry.name)));
+                files.push(...walk(fullPath));
               } else if (entry.isFile() && entry.name === "index.html") {
-                files.push(path.join(dir, entry.name));
+                files.push(fullPath);
               }
             }
             return files;
           }
 
           function fileToRoute(file) {
-            // dist/index.html          → /
-            // dist/about/index.html    → /about
-            // dist/blog/post/index.html → /blog/post
+            // ./index.html           → /
+            // ./docs/index.html      → /docs
+            // ./showcase/foo/index.html → /showcase/foo
             const relative = path.relative(ROOT, path.dirname(file));
             if (relative === "" || relative === ".") return "/";
             return (
@@ -99,10 +106,6 @@ jobs:
               .replace(/>/g, "&gt;")
               .replace(/"/g, "&quot;")
               .replace(/'/g, "&apos;");
-          }
-
-          if (!fs.existsSync(ROOT)) {
-            throw new Error(`dist directory not found: ${ROOT}`);
           }
 
           console.log(`Scanning: ${ROOT}`);
