@@ -1,0 +1,208 @@
+name: Update Sitemap
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/app/**"
+      - "sitemap.xml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sitemap:
+    name: Generate Sitemap
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check whether sitemap needs generation
+        id: check
+        shell: bash
+        run: |
+          # Always generate if sitemap.xml does not exist
+          if [ ! -f sitemap.xml ]; then
+            echo "generate=true" >> "$GITHUB_OUTPUT"
+            echo "sitemap.xml does not exist. Generating it."
+            exit 0
+          fi
+
+          # On the first commit, there may be no HEAD^
+          if ! git rev-parse HEAD^ >/dev/null 2>&1; then
+            echo "generate=true" >> "$GITHUB_OUTPUT"
+            echo "No previous commit. Generating sitemap."
+            exit 0
+          fi
+
+          CHANGED_FILES="$(git diff --name-status HEAD^ HEAD -- src/app/)"
+
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          # Generate when routes are added, deleted, or renamed
+          if echo "$CHANGED_FILES" | grep -qE '^(A|D|R)'; then
+            echo "generate=true" >> "$GITHUB_OUTPUT"
+            echo "Route added, deleted, or renamed."
+          else
+            echo "generate=false" >> "$GITHUB_OUTPUT"
+            echo "No route additions, deletions, or renames."
+          fi
+
+      - name: Generate sitemap
+        if: steps.check.outputs.generate == 'true'
+        shell: bash
+        run: |
+          node <<'EOF'
+          const fs = require("fs");
+          const path = require("path");
+
+          const ROOT = path.resolve("src/app");
+          const OUTPUT = path.resolve("sitemap.xml");
+          const BASE_URL = "https://bini.js.org";
+
+          const EXTENSIONS = new Set([".tsx", ".jsx"]);
+
+          const SPECIAL_FILES = new Set([
+            "layout",
+            "loading",
+            "error",
+            "not-found",
+            "notfound",
+            "template",
+            "default"
+          ]);
+
+          function walk(dir) {
+            const entries = fs.readdirSync(dir, {
+              withFileTypes: true
+            });
+
+            const files = [];
+
+            for (const entry of entries) {
+              const fullPath = path.join(dir, entry.name);
+
+              if (entry.isDirectory()) {
+                files.push(...walk(fullPath));
+              } else if (entry.isFile()) {
+                files.push(fullPath);
+              }
+            }
+
+            return files;
+          }
+
+          function fileToRoute(file) {
+            const relative = path.relative(ROOT, file);
+            const parsed = path.parse(relative);
+
+            if (!EXTENSIONS.has(parsed.ext)) {
+              return null;
+            }
+
+            const filename = parsed.name;
+
+            if (SPECIAL_FILES.has(filename)) {
+              return null;
+            }
+
+            const directory = path.dirname(relative);
+
+            let route;
+
+            if (filename === "page") {
+              route =
+                directory === "."
+                  ? "/"
+                  : `/${directory.replaceAll("\\", "/")}`;
+            } else {
+              route =
+                directory === "."
+                  ? `/${filename}`
+                  : `/${directory.replaceAll("\\", "/")}/${filename}`;
+            }
+
+            return route
+              .replace(/\\/g, "/")
+              .replace(/\/+/g, "/")
+              .replace(/\/$/, "") || "/";
+          }
+
+          function escapeXml(value) {
+            return value
+              .replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;")
+              .replace(/"/g, "&quot;")
+              .replace(/'/g, "&apos;");
+          }
+
+          if (!fs.existsSync(ROOT)) {
+            throw new Error(`Route directory not found: ${ROOT}`);
+          }
+
+          const routes = [
+            ...new Set(
+              walk(ROOT)
+                .map(fileToRoute)
+                .filter(Boolean)
+            )
+          ].sort((a, b) => {
+            if (a === "/") return -1;
+            if (b === "/") return 1;
+            return a.localeCompare(b);
+          });
+
+          const urls = routes
+            .map(route => {
+              const url = `${BASE_URL}${route}`;
+
+              return `  <url>
+    <loc>${escapeXml(url)}</loc>
+  </url>`;
+            })
+            .join("\n");
+
+          const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+          ${urls}
+          </urlset>
+          `
+            .replace(/^ {10}/gm, "")
+            .trim() + "\n";
+
+          fs.writeFileSync(OUTPUT, sitemap, "utf8");
+
+          console.log(`Generated ${OUTPUT}`);
+          console.log(`Found ${routes.length} routes:`);
+
+          for (const route of routes) {
+            console.log(`  ${route}`);
+          }
+          EOF
+
+      - name: Commit sitemap
+        if: steps.check.outputs.generate == 'true'
+        shell: bash
+        run: |
+          if git diff --quiet -- sitemap.xml && git ls-files --error-unmatch sitemap.xml >/dev/null 2>&1; then
+            echo "Sitemap is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add sitemap.xml
+
+          git commit -m "chore: update sitemap"
+
+          git push
