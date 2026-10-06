@@ -1,67 +1,72 @@
 # Bini.js
-> A native React framework for building web, desktop, and mobile apps from one codebase.
 
-Bini.js provides file-based routing, nested layouts, API routes (Hono), environment variables, MDX, native builds (Tauri), and deployment tooling — similar in spirit to the Next.js App Router, but as a pure SPA on Vite.
+A zero-config cross-platform React framework for building web, desktop, and mobile apps from a single codebase.
 
-Homepage: https://bini.js.org/
-Docs: https://bini.js.org/docs
-Plugins: https://bini.js.org/plugins
-Showcase: https://bini.js.org/showcase
-GitHub: https://github.com/Binidu01/bini-cli
-npm: https://www.npmjs.com/package/create-bini-app
+Bini.js is built on Vite, React, and Hono. It provides file-based routing, nested layouts, API routes, environment variables, MDX, native builds with Tauri, static generation, and deployment tooling for web, Windows, macOS, Linux, Android, and iOS.
 
-## Docs — Getting Started
+- Homepage: https://bini.js.org/
+- Documentation: https://bini.js.org/docs
+- Plugins: https://bini.js.org/plugins
+- Showcase: https://bini.js.org/showcase
+- Framework repository: https://github.com/Binidu01/bini-cli
+- Official website repository: https://github.com/Binidu01/bini
+- npm: https://www.npmjs.com/package/create-bini-app
+- Sitemap: https://bini.js.org/sitemap.xml
 
-- [Introduction](https://bini.js.org/docs): What Bini.js is and how to use the docs
-- [Installation](https://bini.js.org/docs/installation): Install and scaffold with create-bini-app
-- [Project Structure](https://bini.js.org/docs/project-structure): src/app layout and conventions
-- [Layouts and Pages](https://bini.js.org/docs/layouts-and-pages): Creating pages and nested layouts
-- [Linking and Navigating](https://bini.js.org/docs/linking-and-navigating): Client-side navigation
+## Documentation
 
-## Docs — Routing
+### Getting Started
+
+- [Documentation](https://bini.js.org/docs)
+- [Installation](https://bini.js.org/docs/installation)
+- [Project Structure](https://bini.js.org/docs/project-structure)
+- [Layouts and Pages](https://bini.js.org/docs/layouts-and-pages)
+- [Linking and Navigating](https://bini.js.org/docs/linking-and-navigating)
+
+### Routing
 
 - [Folder-Based Routing](https://bini.js.org/docs/folder-based-routing)
 - [File-Based Routing](https://bini.js.org/docs/file-based-routing)
 - [Dynamic Routes](https://bini.js.org/docs/dynamic-routes)
 - [Parallel Routes](https://bini.js.org/docs/parallel-routes)
 - [Catch-All Routes](https://bini.js.org/docs/catch-all-routes)
-- [MDX & Markdown](https://bini.js.org/docs/mdx-markdown)
+- [MDX and Markdown](https://bini.js.org/docs/mdx-markdown)
 
-## Docs — Special Files
+### Special Files
 
-- [Loading UI](https://bini.js.org/docs/load)
+- [Loading](https://bini.js.org/docs/load)
 - [Error Boundaries](https://bini.js.org/docs/error-boundaries)
-- [Template](https://bini.js.org/docs/templates)
-- [Default](https://bini.js.org/docs/defaults)
-- [Not Found (404)](https://bini.js.org/docs/notfound)
+- [Templates](https://bini.js.org/docs/templates)
+- [Defaults](https://bini.js.org/docs/defaults)
+- [Not Found](https://bini.js.org/docs/notfound)
 
-## Docs — Metadata & SEO
+### Metadata and SEO
 
 - [Metadata](https://bini.js.org/docs/metadata)
-- [Open Graph & Twitter](https://bini.js.org/docs/og-twitter)
-- [Icons & Favicons](https://bini.js.org/docs/icons)
+- [Open Graph and Twitter](https://bini.js.org/docs/og-twitter)
+- [Icons](https://bini.js.org/docs/icons)
 
-## Docs — API Routes
+### API Routes
 
-- [API Routes Overview](https://bini.js.org/docs/api-routes)
-- [Plain Function Handlers](https://bini.js.org/docs/api-plain)
-- [Hono Integration](https://bini.js.org/docs/api-hono)
+- [API Routes](https://bini.js.org/docs/api-routes)
+- [Plain API Routes](https://bini.js.org/docs/api-plain)
+- [Hono API Routes](https://bini.js.org/docs/api-hono)
 - [Dynamic API Routes](https://bini.js.org/docs/api-dynamic)
 - [CORS](https://bini.js.org/docs/api-cors)
 
-## Docs — Environment Variables
+### Environment Variables
 
 - [Environment Variables](https://bini.js.org/docs/environment-variables)
-- [Prefixes & Client Exposure](https://bini.js.org/docs/env-prefixes)
-- [Using in API Routes](https://bini.js.org/docs/env-api)
+- [Environment Variable Prefixes](https://bini.js.org/docs/env-prefixes)
+- [Environment Variable API](https://bini.js.org/docs/env-api)
 
-## Docs — Styling
+### Styling
 
-- [CSS Overview](https://bini.js.org/docs/css)
+- [CSS](https://bini.js.org/docs/css)
 - [Tailwind CSS](https://bini.js.org/docs/tailwind)
 - [CSS Modules](https://bini.js.org/docs/css-modules)
 
-## Docs — Platforms
+### Platforms
 
 - [Web](https://bini.js.org/docs/platform-web)
 - [Windows](https://bini.js.org/docs/platform-windows)
@@ -70,27 +75,97 @@ npm: https://www.npmjs.com/package/create-bini-app
 - [Android](https://bini.js.org/docs/platform-android)
 - [iOS](https://bini.js.org/docs/platform-ios)
 
-## Docs — Deployment
+### Deployment
 
-- [Deployment Overview](https://bini.js.org/docs/deploying)
+- [Deploying](https://bini.js.org/docs/deploying)
 - [Production Server](https://bini.js.org/docs/production-server)
 - [Static Export](https://bini.js.org/docs/static-export)
-- [Hosting Providers](https://bini.js.org/docs/hosting)
+- [Hosting](https://bini.js.org/docs/hosting)
 
 ## Plugins
 
 - [Plugins Overview](https://bini.js.org/plugins)
-- [create-bini-app](https://bini.js.org/plugins/create-bini-app): Scaffold Vite + React + Hono projects
-- [bini-deploy](https://bini.js.org/plugins/bini-deploy): Zero-config deploy CLI
-- [bini-router](https://bini.js.org/plugins/bini-router): File-based routing, layouts, MDX, API routes
-- [bini-env](https://bini.js.org/plugins/bini-env): Hono-native env across Node, Bun, Deno, Edge
-- [bini-native](https://bini.js.org/plugins/bini-native): Automatic Tauri wiring
-- [bini-server](https://bini.js.org/plugins/bini-server): Production static/SPA server
-- [bini-overlay](https://bini.js.org/plugins/bini-overlay): Dev error overlay and loading badge
-- [bini-ssg](https://bini.js.org/plugins/bini-ssg): Static pre-render at build time
 
-## Optional
+### create-bini-app
 
-- [Sitemap](https://bini.js.org/sitemap.xml)
+Scaffolds a zero-config Bini.js project with Vite, React, Hono, routing, native platform support, and deployment tooling.
+
+- [Documentation](https://bini.js.org/plugins/create-bini-app)
+- [npm](https://www.npmjs.com/package/create-bini-app)
 - [GitHub](https://github.com/Binidu01/bini-cli)
-- [npm create-bini-app](https://www.npmjs.com/package/create-bini-app)
+
+### bini-deploy
+
+Zero-config deployment tooling for Bini.js apps across web, desktop, and mobile.
+
+- [Documentation](https://bini.js.org/plugins/bini-deploy)
+- [npm](https://www.npmjs.com/package/bini-deploy)
+- [GitHub](https://github.com/Binidu01/bini-deploy)
+
+### bini-router
+
+File-based routing, layouts, loading and error boundaries, 404 handling, MDX pages, and Hono API route integration.
+
+- [Documentation](https://bini.js.org/plugins/bini-router)
+- [npm](https://www.npmjs.com/package/bini-router)
+- [GitHub](https://github.com/Binidu01/bini-router)
+
+### bini-env
+
+Hono-native environment variables for Node, Bun, Deno, Edge runtimes, and Workers.
+
+- [Documentation](https://bini.js.org/plugins/bini-env)
+- [npm](https://www.npmjs.com/package/bini-env)
+- [GitHub](https://github.com/Binidu01/bini-env)
+
+### bini-native
+
+Automatic Tauri integration: native project wiring, Rust plugins, manifests, and platform configuration.
+
+- [Documentation](https://bini.js.org/plugins/bini-native)
+- [npm](https://www.npmjs.com/package/bini-native)
+- [GitHub](https://github.com/Binidu01/bini-native)
+
+### bini-server
+
+Production server with ETag caching, SPA fallback, request timeouts, and graceful shutdown.
+
+- [Documentation](https://bini.js.org/plugins/bini-server)
+- [npm](https://www.npmjs.com/package/bini-server)
+- [GitHub](https://github.com/Binidu01/bini-server)
+
+### bini-overlay
+
+Development error overlay and loading indicator with HMR integration and stack traces.
+
+- [Documentation](https://bini.js.org/plugins/bini-overlay)
+- [npm](https://www.npmjs.com/package/bini-overlay)
+- [GitHub](https://github.com/Binidu01/bini-overlay)
+
+### bini-ssg
+
+Pre-renders Bini.js routes to static HTML at build time — no separate export command.
+
+- [Documentation](https://bini.js.org/plugins/bini-ssg)
+- [npm](https://www.npmjs.com/package/bini-ssg)
+- [GitHub](https://github.com/Binidu01/bini-ssg)
+
+## Ecosystem
+
+Official packages cover common patterns that often need extra plugins elsewhere.
+
+Core flow:
+create-bini-app scaffolds → bini-router handles routing → bini-env manages environment variables → bini-native wires native platforms → bini-server / bini-ssg handle production delivery → bini-deploy handles deployment.
+
+Plugins are Vite-native and work across the supported Bini.js platforms.
+
+## Resources
+
+- [Homepage](https://bini.js.org/)
+- [Documentation](https://bini.js.org/docs)
+- [Plugins](https://bini.js.org/plugins)
+- [Showcase](https://bini.js.org/showcase)
+- [Framework GitHub](https://github.com/Binidu01/bini-cli)
+- [Website GitHub](https://github.com/Binidu01/bini)
+- [create-bini-app on npm](https://www.npmjs.com/package/create-bini-app)
+- [Sitemap](https://bini.js.org/sitemap.xml)
