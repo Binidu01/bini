@@ -1,25 +1,27 @@
-name: Update Sitemap
+name: Deploy site with sitemap
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - "**.html"
-      - "docs/**"
-      - "showcase/**"
-      - "plugins/**"
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: write   # needed to commit sitemap.xml
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  sitemap:
-    name: Generate Sitemap
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -41,7 +43,6 @@ jobs:
           const OUTPUT = path.resolve("sitemap.xml");
           const BASE_URL = "https://bini.js.org";
 
-          // Skip non-page directories
           const SKIP_DIRS = new Set([
             ".git",
             ".github",
@@ -73,9 +74,6 @@ jobs:
           }
 
           function fileToRoute(file) {
-            // ./index.html           → /
-            // ./docs/index.html      → /docs
-            // ./showcase/foo/index.html → /showcase/foo
             const relative = path.relative(ROOT, path.dirname(file));
             if (relative === "" || relative === ".") return "/";
             return (
@@ -136,7 +134,7 @@ jobs:
             `<?xml version="1.0" encoding="UTF-8"?>`,
             `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
             ...routes.map(({ route, lastmod }) => {
-              const url = `${BASE_URL}${route === "/" ? "" : route}`;
+              const url = route === "/" ? `${BASE_URL}/` : `${BASE_URL}${route}`;
               const lines = [
                 `  <url>`,
                 `    <loc>${escapeXml(url)}</loc>`,
@@ -172,5 +170,17 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: update sitemap"
+          git commit -m "chore: update sitemap [skip ci]"
           git push
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
