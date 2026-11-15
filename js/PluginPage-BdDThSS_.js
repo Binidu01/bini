@@ -1,0 +1,1 @@
+import{c as e}from"./DocBlocks-L2h6_38O.js";import{a as t}from"./index-DphG0dNL.js";var n=t();function r({title:t,badge:r,description:i,url:a,editUrl:o,toc:s,prev:c,next:l,children:u}){return(0,n.jsx)(e,{title:t,badge:r,description:i,url:a,editUrl:o,toc:s,prev:c,next:l,children:u})}export{r as t};
