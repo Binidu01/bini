@@ -1,0 +1,1 @@
+import{a as e,o as t,s as n}from"./index-D2AXdX0y.js";var r=n(t(),1),i=e();function a({children:e,modal:t}){return(0,i.jsxs)(r.Fragment,{children:[e,t]})}export{a as default};
